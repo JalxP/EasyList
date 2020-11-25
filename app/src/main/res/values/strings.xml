@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">EasyList</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_shoppinglists">Shopping Lists</string>
+
+
+    <string name="edit_image_button">Edit Image Button</string>
+    <string name="delete_image_button">Delete Image Button</string>
+    <string name="create_list_button">Create List Button</string>
+    <string name="sort_by">Sort by:</string>
+
+    <string name="default_sort">Default</string>
+    <string name="category_sort">Category</string>
+    <string name="purchase_sort">Purchased</string>
+
+    <string name="activity_all_lists">Shopping Lists</string>
+    <string name="activity_create_list">Create Shopping List</string>
+
+    <string name="scanner">Scanner</string>
+    <string name="about">About</string>
+    <string name="search">Search</string>
+    <string name="create_shopping_list">Create Shopping List</string>
+    <string name="create">Create</string>
+
+    <string-array name="sort_by_array">
+        <item>@string/default_sort</item>
+        <item>@string/category_sort</item>
+        <item>@string/purchase_sort</item>
+    </string-array>
+
+
+</resources>
