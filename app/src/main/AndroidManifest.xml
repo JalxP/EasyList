@@ -9,9 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyList">
-        <activity android:name=".ui.shoppingList.SingleListActivity"
+        <activity
+            android:name=".ui.products.AddProductActivity"
+            android:theme="@style/Theme.EasyList.NoActionBar" />
+        <activity
+            android:name=".ui.shoppingList.SingleListActivity"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.EasyList.NoActionBar"></activity>
+            android:theme="@style/Theme.EasyList.NoActionBar" />
         <activity
             android:name=".ui.shoppingList.AddShoppingListActivity"
             android:parentActivityName=".MainActivity"

@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import me.jalxp.easylist.R
 import me.jalxp.easylist.databinding.ActivitySingleListBinding
+import me.jalxp.easylist.ui.products.ProductsFragment
 
 class SingleListActivity : AppCompatActivity(), OnItemSelectedListener {
 
@@ -21,10 +22,19 @@ class SingleListActivity : AppCompatActivity(), OnItemSelectedListener {
         super.onCreate(savedInstanceState)
         binding = ActivitySingleListBinding.inflate(layoutInflater)
         val view = binding.root
-        setContentView(view)
 
         val selectedListId = intent.getLongExtra(EXTRA_LIST_ID, 0L)
         val selectedListTitle = intent.getStringExtra(EXTRA_LIST_TITLE)
+
+        val bundle = Bundle()
+        val productsFragment = ProductsFragment()
+        productsFragment.arguments = bundle
+
+        supportFragmentManager.beginTransaction().add(
+            R.id.products_frame, productsFragment).commit()
+
+        setContentView(view)
+
         title = selectedListTitle
 
         setSupportActionBar(binding.singleListToolbar)
@@ -32,13 +42,6 @@ class SingleListActivity : AppCompatActivity(), OnItemSelectedListener {
 
         sortsArray = resources.getStringArray(R.array.sort_by_array)
         setupSpinner()
-
-
-        Toast.makeText(
-            this,
-            "Received: ID: $selectedListId, Title: $selectedListTitle",
-            Toast.LENGTH_LONG
-        ).show()
 
     }
 

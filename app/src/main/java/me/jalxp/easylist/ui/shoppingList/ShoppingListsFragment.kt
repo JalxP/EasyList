@@ -13,7 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import me.jalxp.easylist.adapters.ShoppingListsAdapter
 import me.jalxp.easylist.databinding.FragmentShoppingListsBinding
-import me.jalxp.easylist.model.ShoppingList
+import me.jalxp.easylist.data.entities.ShoppingList
 
 const val EXTRA_LIST_ID = "extra list id"
 const val EXTRA_LIST_TITLE = "extra list name"

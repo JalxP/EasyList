@@ -23,11 +23,6 @@ class AddShoppingListActivity : AppCompatActivity() {
         setSupportActionBar(binding.createShoppingListToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.createShoppingListTitle.requestFocus()
-        //val imm: InputMethodManager =
-        //    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        //imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
-
         binding.createListButton.setOnClickListener {
             createShoppingList()
         }

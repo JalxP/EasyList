@@ -1,6 +1,5 @@
-package me.jalxp.easylist.model
+package me.jalxp.easylist.data.entities
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -8,8 +7,10 @@ import androidx.room.PrimaryKey
 data class Product(
     var name: String,
     var description: String,
-    var quantityId: Long?,
-    var categoryId: Long,
+    var quantity: Int,
+    var measureUnitId: Long?,
+    var categoryId: Long?,
+    var shoppingListId: Long,
     var brand: String?,
     var barCode: Double?,
     var imagePath: String?

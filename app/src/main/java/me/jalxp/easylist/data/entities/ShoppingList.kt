@@ -1,6 +1,5 @@
-package me.jalxp.easylist.model
+package me.jalxp.easylist.data.entities
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

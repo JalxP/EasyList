@@ -18,6 +18,7 @@
     <string name="edit_image_button">Edit Image Button</string>
     <string name="delete_image_button">Delete Image Button</string>
     <string name="create_list_button">Create List Button</string>
+    <string name="add_product_button">Add Product Button</string>
     <string name="sort_by">Sort by:</string>
 
     <string name="default_sort">Default</string>
@@ -32,6 +33,13 @@
     <string name="search">Search</string>
     <string name="create_shopping_list">Create Shopping List</string>
     <string name="create">Create</string>
+    <string name="shopping_list_name_hint">Name</string>
+    <string name="add_new_product">Add New Product</string>
+    <string name="product_name_hint">Name</string>
+    <string name="product_description_hint">Description</string>
+    <string name="product_brand_hint">Brand</string>
+    <string name="add_button">Add</string>
+    <string name="activity_add_product">Add Product</string>
 
     <string-array name="sort_by_array">
         <item>@string/default_sort</item>

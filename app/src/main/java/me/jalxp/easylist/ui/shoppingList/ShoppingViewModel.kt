@@ -3,12 +3,12 @@ package me.jalxp.easylist.ui.shoppingList
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import me.jalxp.easylist.model.Data
-import me.jalxp.easylist.model.DataAccessObject
-import me.jalxp.easylist.model.ShoppingList
+import me.jalxp.easylist.data.*
+import me.jalxp.easylist.data.entities.ShoppingList
+import me.jalxp.easylist.data.daos.ShoppingListDao
 import java.util.concurrent.Executors
 
-class ShoppingViewModel(val dataSource: DataAccessObject): ViewModel() {
+class ShoppingViewModel(val dataSource: ShoppingListDao) : ViewModel() {
     val shoppingListsLiveData = dataSource.getAllShoppingLists()
 
     private val executorService = Executors.newSingleThreadExecutor()
@@ -32,7 +32,7 @@ class ShoppingViewModel(val dataSource: DataAccessObject): ViewModel() {
 class ShoppingListViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return ShoppingViewModel(
-            Data.getData(context)
+            AppDatabase.getInstance(context).shoppingListsDao()
         ) as T
     }
 }

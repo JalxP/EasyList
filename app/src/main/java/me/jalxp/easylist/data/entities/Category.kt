@@ -1,6 +1,5 @@
-package me.jalxp.easylist.model
+package me.jalxp.easylist.data.entities
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -9,5 +8,5 @@ data class Category(
     var designation: String
 ) {
     @PrimaryKey(autoGenerate = true)
-    var categoryId: Long = 0L
+    var categoryId: Long = 0
 }

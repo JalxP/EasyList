@@ -7,10 +7,13 @@
     <dimen name="fab_margin">16dp</dimen>
 
 
-    <dimen name="margin">16dp</dimen>
     <dimen name="margin_small">8dp</dimen>
-    <dimen name="padding">16dp</dimen>
+    <dimen name="margin">16dp</dimen>
+
+    <dimen name="padding_tiny">4dp</dimen>
     <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding">16dp</dimen>
     <dimen name="padding_big">32dp</dimen>
+
     <dimen name="toolbar_elevation">4dp</dimen>
 </resources>

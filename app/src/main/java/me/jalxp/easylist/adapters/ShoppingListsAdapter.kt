@@ -3,13 +3,11 @@ package me.jalxp.easylist.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import me.jalxp.easylist.R
 import me.jalxp.easylist.databinding.ListItemBinding
-import me.jalxp.easylist.model.ShoppingList
+import me.jalxp.easylist.data.entities.ShoppingList
 
 class ShoppingListsAdapter(
     private val onItemClick: (ShoppingList) -> Unit,
@@ -28,7 +26,7 @@ class ShoppingListsAdapter(
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
-        private val listTitleTextView = itemView.findViewById<TextView>(R.id.itemTitle)
+        private val listTitleTextView = binding.itemTitle
         private var currentList: ShoppingList? = null
 
         init {

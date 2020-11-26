@@ -18,7 +18,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin"
@@ -26,7 +25,6 @@
         android:layout_marginEnd="@dimen/margin"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/create_shopping_list_toolbar">
 
@@ -48,7 +46,7 @@
                 android:id="@+id/create_shopping_list_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Shopping List Name" />
+                android:hint="@string/shopping_list_name_hint" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
