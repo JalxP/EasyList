@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        android:id="@+id/menu_group_main">
         <item
             android:id="@+id/nav_shoppinglists"
             android:icon="@android:drawable/ic_dialog_dialer"
@@ -12,10 +13,12 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
+    </group>
+    <group android:id="@+id/menu_group_secundary">
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_categories"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:title="@string/menu_categories" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"

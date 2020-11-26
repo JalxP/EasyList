@@ -22,7 +22,7 @@ class ShoppingListsFragment : Fragment() {
 
     private lateinit var binding: FragmentShoppingListsBinding
     private val newListActivityRequestCode = 1
-    private val shoppingViewModel: ShoppingViewModel by viewModels<ShoppingViewModel> {
+    private val shoppingViewModel: ShoppingViewModel by viewModels {
         ShoppingListViewModelFactory(requireContext())
     }
 

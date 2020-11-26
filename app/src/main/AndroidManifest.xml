@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyList">
         <activity
+            android:name=".ui.categories.AddCategoryActivity"
+            android:theme="@style/Theme.EasyList.NoActionBar" />
+        <activity
             android:name=".ui.products.AddProductActivity"
             android:theme="@style/Theme.EasyList.NoActionBar" />
         <activity

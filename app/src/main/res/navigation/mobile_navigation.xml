@@ -18,10 +18,10 @@
         tools:layout="@layout/fragment_shopping_lists"/>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="me.jalxp.easylist.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_categories"
+        android:name="me.jalxp.easylist.ui.categories.CategoriesFragment"
+        android:label="@string/menu_categories"
+        tools:layout="@layout/fragment_categories" />
 
     <fragment
         android:id="@+id/nav_slideshow"

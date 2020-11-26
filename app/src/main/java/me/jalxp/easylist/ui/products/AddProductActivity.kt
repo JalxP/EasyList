@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
 import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import me.jalxp.easylist.R
@@ -33,7 +35,7 @@ class AddProductActivity : AppCompatActivity() {
 
         title = getString(R.string.activity_add_product)
         setSupportActionBar(binding.addProductListToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(false) // TODO CHECK THIS
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) // TODO CHECK THIS
 
         // Populate spinners here
         val possibleCategories = categoriesViewModel.getAllCategories().value
@@ -51,6 +53,11 @@ class AddProductActivity : AppCompatActivity() {
         binding.addProductButton.setOnClickListener {
             addProduct()
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        finish()
+        return super.onOptionsItemSelected(item)
     }
 
     private fun addProduct() {

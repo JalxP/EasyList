@@ -25,6 +25,15 @@ class CategoriesViewModel(val dataSource: CategoryDao) : ViewModel() {
     fun getAllCategories(): LiveData<List<Category>> {
         return dataSource.getAllCategories()
     }
+
+    fun deleteCategory(category: Category) {
+
+        // TODO only delete if it has no products associated!!
+
+        executorService.execute {
+            dataSource.deleteCategory(category)
+        }
+    }
 }
 
 class CategoriesViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
