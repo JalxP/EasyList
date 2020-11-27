@@ -8,14 +8,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import me.jalxp.easylist.adapters.ProductsListAdapter
+import me.jalxp.easylist.data.entities.Product
+import me.jalxp.easylist.data.entities.ShoppingList
 import me.jalxp.easylist.databinding.FragmentProductsBinding
 import me.jalxp.easylist.ui.shoppingList.EXTRA_LIST_ID
+import me.jalxp.easylist.ui.shoppingList.EXTRA_LIST_TITLE
+import me.jalxp.easylist.ui.shoppingList.SingleListActivity
 
 class ProductsFragment : Fragment() {
 
     private lateinit var binding: FragmentProductsBinding
+    private val productsViewModel: ProductsViewModel by viewModels {
+        ProductsViewModelFactory(requireContext())
+    }
     private val addProductActivityRequestCode = 1
 
     override fun onCreateView(
@@ -27,22 +35,20 @@ class ProductsFragment : Fragment() {
 
         val shoppingListId = requireArguments().getLong(EXTRA_LIST_ID)
 
-        /* Recycler View */
-        val productsListAdapter = ProductsListAdapter()
+        /* RecycleView */
+        val productsAdapter = ProductsListAdapter { product -> adapterOnItemClick(product) }
         with(binding) {
-            recycleViewList.adapter = productsListAdapter
+            recycleViewList.adapter = productsAdapter
             recycleViewList.layoutManager = GridLayoutManager(this@ProductsFragment.context, 3)
         }
 
-        val products = 0 // TODO viewmodel, etc, etc
-
-        /* products.observe(viewLifecycleOwner, {
+        productsViewModel.productsLiveData.observe(viewLifecycleOwner, {
             it?.let {
-                productsListAdapter.submitList(it as MutableList<Product>)
+                productsAdapter.submitList(it as MutableList<Product>)
             }
         })
-        */
 
+        /* Floating Button */
         binding.addProductFab.setOnClickListener {
             addProductOnClick()
         }
@@ -70,6 +76,10 @@ class ProductsFragment : Fragment() {
             }
 
         }
+    }
+
+    private fun adapterOnItemClick(product: Product) {
+        // TODO
     }
 
     private fun addProductOnClick() {

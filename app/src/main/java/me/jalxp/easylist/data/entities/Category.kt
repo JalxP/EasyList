@@ -9,4 +9,6 @@ data class Category(
 ) {
     @PrimaryKey(autoGenerate = true)
     var categoryId: Long = 0
+
+    override fun toString() = designation
 }

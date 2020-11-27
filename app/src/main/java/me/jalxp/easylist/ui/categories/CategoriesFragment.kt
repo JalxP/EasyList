@@ -78,6 +78,9 @@ class CategoriesFragment : Fragment() {
     }
 
     private fun adapterOnDeleteClick(category: Category) {
+
+        // TODO check if category has products
+        // Remove category from said products
         categoriesViewModel.deleteCategory(category)
     }
 

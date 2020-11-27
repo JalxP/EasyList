@@ -4,12 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import me.jalxp.easylist.R
-import me.jalxp.easylist.data.entities.Category
 import me.jalxp.easylist.databinding.ActivityAddProductBinding
 import me.jalxp.easylist.ui.categories.CategoriesViewModel
 import me.jalxp.easylist.ui.categories.CategoriesViewModelFactory
@@ -35,18 +34,13 @@ class AddProductActivity : AppCompatActivity() {
 
         title = getString(R.string.activity_add_product)
         setSupportActionBar(binding.addProductListToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true) // TODO CHECK THIS
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Populate spinners here
-        val possibleCategories = categoriesViewModel.getAllCategories().value
-        val tempList = mutableListOf<Category>()
-        possibleCategories?.forEach {
-            tempList.add(it)
-        }
-
-        val categorySpinnerAdapter = ArrayAdapter(this,
-            android.R.layout.simple_spinner_item, tempList)
-        binding.categoryPickerSpinner.adapter = categorySpinnerAdapter
+        categoriesViewModel.categoriesLiveData.observe(this, Observer { spinnerData ->
+            val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, spinnerData)
+            binding.categoryPickerSpinner.adapter = spinnerAdapter
+        })
 
         // TODO other spinner here
 
