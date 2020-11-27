@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import me.jalxp.easylist.R
 import me.jalxp.easylist.databinding.ActivityAddProductBinding
 import me.jalxp.easylist.ui.categories.CategoriesViewModel
@@ -43,23 +44,15 @@ class AddProductActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Populate dropdown lists
-        val categoriesArray = mutableListOf<String>()
-        categoriesViewModel.categoriesLiveData.value?.forEach {
-            categoriesArray.add(it.designation)
-        }
-        val categoriesAdapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, categoriesArray)
-        (binding.categoryAutoComplete as? AutoCompleteTextView)?.setAdapter(categoriesAdapter)
+        categoriesViewModel.categoriesLiveData.observe(this, Observer { dropdownData ->
+            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, dropdownData)
+            (binding.categoryAutoComplete as? AutoCompleteTextView)?.setAdapter(adapter)
+        })
 
-        val measurementsArray = mutableListOf<String>()
-        measurementUnitsViewModel.measurementUnitsLiveData.value?.forEach {
-            measurementsArray.add(it.designation)
-        }
-        val measurementUnitsAdapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, measurementsArray)
-        (binding.measurementUnitAutoComplete as? AutoCompleteTextView)?.setAdapter(
-            measurementUnitsAdapter
-        )
+        measurementUnitsViewModel.measurementUnitsLiveData.observe(this, Observer { dropdownData ->
+            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, dropdownData)
+            (binding.measurementUnitAutoComplete as? AutoCompleteTextView)?.setAdapter(adapter)
+        })
 
         /* Float Action Button */
         binding.addProductButton.setOnClickListener {
@@ -76,7 +69,7 @@ class AddProductActivity : AppCompatActivity() {
         val resultIntent = Intent()
 
         val productName = binding.productNameInput.text.toString()
-        if (productName.isNullOrEmpty()) {
+        if (productName.isEmpty()) {
             binding.productNameTextLayout.error = getString(R.string.need_name_error)
             return
         }

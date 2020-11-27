@@ -17,7 +17,7 @@ class ProductsViewModel(val dataSource: ProductDao) : ViewModel() {
 
     fun insertNewProduct(
         name: String,
-        description: String,
+        description: String?,
         quantity: Int,
         measureUnitId: Long?,
         categoryId: Long?,

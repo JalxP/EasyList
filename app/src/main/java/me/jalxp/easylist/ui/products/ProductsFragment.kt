@@ -37,6 +37,7 @@ class ProductsFragment : Fragment() {
     }
 
     private val addProductActivityRequestCode = 1
+    private var shoppingListId: Long? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +46,7 @@ class ProductsFragment : Fragment() {
         /* View Binding */
         binding = FragmentProductsBinding.inflate(layoutInflater, container, false)
 
-        val shoppingListId = requireArguments().getLong(EXTRA_LIST_ID)
+        shoppingListId = requireArguments().getLong(EXTRA_LIST_ID)
 
         /* RecycleView */
         val productsAdapter = ProductsListAdapter(
@@ -79,19 +80,29 @@ class ProductsFragment : Fragment() {
         if (requestCode == addProductActivityRequestCode && resultCode == Activity.RESULT_OK)
         {
             intentData?.let { data ->
-                val productName = data.getStringExtra(PRODUCT_NAME)
-                val productDescription = data.getStringExtra(PRODUCT_DESCRIPTION)
-                val productQuantity = data.getIntExtra(PRODUCT_QUANTITY, 0)
-                val productCategory = data.getStringExtra(PRODUCT_CATEGORY)
+                val productName = data.getStringExtra(PRODUCT_NAME) ?: ""
+                val productDescription = data.getStringExtra(PRODUCT_DESCRIPTION) ?: ""
+                val productQuantity = data.getIntExtra(PRODUCT_QUANTITY, 1)
+                val productMeasureUnit = data.getStringExtra(PRODUCT_MEASUREMENT_UNIT) ?: ""
+                val productCategory = data.getStringExtra(PRODUCT_CATEGORY) ?: ""
+                val productBrand = data.getStringExtra(PRODUCT_BRAND) ?: ""
 
-                Log.e("<Products Fragment>","Name: $productName, Desc: $productDescription, Qty: $productQuantity, Cat: $productCategory")
-
-                if (!productName.isNullOrEmpty() && !productDescription.isNullOrEmpty()) {
-                    // productViewModel
-                }
+                addNewProduct(productName, productDescription, productQuantity, productMeasureUnit, productCategory, productBrand)
             }
 
         }
+    }
+
+    private fun addNewProduct(
+        productName: String,
+        productDescription: String,
+        productQuantity: Int,
+        productMeasureUnit: String,
+        productCategory: String,
+        productBrand: String
+    ) {
+        // TODO
+        productsViewModel.insertNewProduct(productName, productDescription, productQuantity, null, null, shoppingListId!!, productBrand, null, null)
     }
 
     private fun adapterOnItemClick(product: Product) {
