@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 @Entity
 data class Product(
     var name: String,
-    var description: String,
-    var quantity: Int,
+    var description: String?,
+    var quantity: Int?,
     var measureUnitId: Long?,
     var categoryId: Long?,
     var shoppingListId: Long,

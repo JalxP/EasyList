@@ -36,7 +36,7 @@
             android:textAlignment="center" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/productImageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin"
@@ -47,75 +47,106 @@
             android:id="@+id/product_name_text_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="@dimen/padding">
+            android:layout_marginBottom="@dimen/margin_small"
+            android:hint="@string/product_name_hint"
+            app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
+            app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/product_name_input"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/product_name_hint" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/product_description_text_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="@dimen/padding">
+            android:layout_marginBottom="@dimen/margin_small"
+            android:hint="@string/product_description_hint"
+            app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
+            app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
+            app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/product_description_input"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/product_description_hint" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/padding">
+            android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_weight="1"
+                android:hint="@string/quantity"
+                app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
+                app:boxCornerRadiusTopStart="@dimen/input_corner_radius">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/product_quantity_input"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="Quantity"
                     android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/measurement_unit_spinner"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:paddingTop="@dimen/padding"
-                android:paddingBottom="@dimen/padding" />
-        </LinearLayout>
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_weight="1"
+                android:hint="@string/unit"
+                app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
+                app:boxCornerRadiusTopStart="@dimen/input_corner_radius">
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/category_picker_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingBottom="@dimen/padding" />
+                <AutoCompleteTextView
+                    android:id="@+id/measurement_unit_auto_complete"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="@dimen/padding">
+            android:layout_marginBottom="@dimen/margin_small"
+            android:hint="@string/category"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
+            app:boxCornerRadiusTopStart="@dimen/input_corner_radius">
+
+            <AutoCompleteTextView
+                android:id="@+id/category_auto_complete"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
+            app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
+            android:hint="@string/product_brand_hint"
+            android:layout_marginBottom="@dimen/margin_small">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/product_brand_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/product_brand_hint" />
+                 />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

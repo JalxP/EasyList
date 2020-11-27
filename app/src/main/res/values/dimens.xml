@@ -16,4 +16,5 @@
     <dimen name="padding_big">32dp</dimen>
 
     <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="input_corner_radius">4dp</dimen>
 </resources>

@@ -5,17 +5,24 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import me.jalxp.easylist.data.entities.MeasureUnit
 import me.jalxp.easylist.databinding.ProductItemBinding
 import me.jalxp.easylist.data.entities.Product
+import me.jalxp.easylist.ui.categories.CategoriesViewModel
+import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModel
 
 class ProductsListAdapter(
+    private val categoriesViewModel: CategoriesViewModel,
+    private val measurementUnitsViewModel: MeasurementUnitsViewModel,
     private val onItemClick: (Product) -> Unit
 ) : ListAdapter<Product, ProductsListAdapter.ProductViewHolder>(ProductListDiffCallback) {
 
     private lateinit var binding: ProductItemBinding
 
     class ProductViewHolder(
-        binding: ProductItemBinding,
+        private val binding: ProductItemBinding,
+        private val categoriesViewModel: CategoriesViewModel,
+        private val measurementUnitsViewModel: MeasurementUnitsViewModel,
         private val onItemClick: (Product) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -28,15 +35,36 @@ class ProductsListAdapter(
                 }
             }
         }
+
+        fun bind(product: Product) {
+            currentProduct = product
+            binding.productNameTextView.text = product.name
+
+            // Check if product has associated quantity and measurement units
+            var quantityText = if (product.quantity != null) product.quantity.toString() else ""
+            if (product.measureUnitId != null) {
+                val measureUnit =
+                    measurementUnitsViewModel.getMeasurementUnitById(product.measureUnitId!!).value as MeasureUnit
+                quantityText += " " + measureUnit.designation
+            }
+            binding.productQuantityTextView.text = quantityText
+
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         binding = ProductItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ProductViewHolder(binding, onItemClick)
+        return ProductViewHolder(
+            binding,
+            categoriesViewModel,
+            measurementUnitsViewModel,
+            onItemClick
+        )
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val product = getItem(position)
+        holder.bind(product)
     }
 }
 

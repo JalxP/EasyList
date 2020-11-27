@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import me.jalxp.easylist.R
 import me.jalxp.easylist.databinding.ActivityAddCategoryBinding
 import me.jalxp.easylist.ui.shoppingList.LIST_TITLE
@@ -27,6 +28,11 @@ class AddCategoryActivity : AppCompatActivity() {
         binding.addCategoryButton.setOnClickListener {
             addCategory()
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        finish()
+        return super.onOptionsItemSelected(item)
     }
 
     private fun addCategory() {

@@ -19,14 +19,13 @@ class ShoppingListsAdapter(
     private lateinit var binding: ListItemBinding
 
     class ShoppingListViewHolder(
-        binding: ListItemBinding,
+        private val binding: ListItemBinding,
         val onItemClick: (ShoppingList) -> Unit,
         val onEditClick: (ShoppingList) -> Unit,
         val onDeleteClick: (ShoppingList) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
-        private val listTitleTextView = binding.itemTitle
         private var currentList: ShoppingList? = null
 
         init {
@@ -49,7 +48,7 @@ class ShoppingListsAdapter(
 
         fun bind(shoppingList: ShoppingList) {
             currentList = shoppingList
-            listTitleTextView.text = shoppingList.title
+            binding.itemTitle.text = shoppingList.title
         }
     }
 
