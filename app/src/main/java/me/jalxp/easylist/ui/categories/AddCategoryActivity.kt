@@ -41,7 +41,8 @@ class AddCategoryActivity : AppCompatActivity() {
         val categoryTitle = binding.addCategoryTitle.text.toString()
 
         if (categoryTitle.isNullOrEmpty()) {
-            setResult(Activity.RESULT_CANCELED, resultIntent)
+            binding.categoryTextLayout.error = getString(R.string.need_description_error)
+            return
         } else {
             resultIntent.putExtra(CATEGORY_DESCRIPTION, categoryTitle)
             setResult(Activity.RESULT_OK, resultIntent)

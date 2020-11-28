@@ -2,8 +2,8 @@
     <string name="app_name">EasyList</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Easy List v0.1</string>
+    <string name="nav_header_subtitle">Arquiteturas Móveis</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -23,6 +23,7 @@
     <string name="category_sort">Category</string>
     <string name="purchase_sort">Purchased</string>
 
+    <!-- Activity Names -->
     <string name="activity_all_lists">Shopping Lists</string>
     <string name="activity_create_list">Create Shopping List</string>
     <string name="activity_add_category">Add Category</string>
@@ -46,9 +47,12 @@
     <string name="quantity">Quantity</string>
     <string name="unit">Unit</string>
     <string name="category">Category</string>
-    <string name="need_name_error">Name is required.</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
+
+    <!-- Input Error Messages -->
+    <string name="need_name_error">Name is required.</string>
+    <string name="need_description_error">Description is required.</string>
 
     <string-array name="sort_by_array">
         <item>@string/default_sort</item>

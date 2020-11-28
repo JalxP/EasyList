@@ -30,7 +30,6 @@ class ShoppingListsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.e("<DEBUG>", "onCreateView")
         // View Binding
         binding = FragmentShoppingListsBinding.inflate(inflater, container, false)
 
