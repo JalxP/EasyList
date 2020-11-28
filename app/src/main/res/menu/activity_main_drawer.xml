@@ -7,7 +7,7 @@
         android:id="@+id/menu_group_main">
         <item
             android:id="@+id/nav_shoppinglists"
-            android:icon="@android:drawable/ic_dialog_dialer"
+            android:icon="@drawable/twotone_receipt_black_24"
             android:title="@string/menu_shoppinglists" />
         <item
             android:id="@+id/nav_home"
@@ -17,7 +17,7 @@
     <group android:id="@+id/menu_group_secundary">
         <item
             android:id="@+id/nav_categories"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/twotone_bookmarks_black_24"
             android:title="@string/menu_categories" />
         <item
             android:id="@+id/nav_slideshow"

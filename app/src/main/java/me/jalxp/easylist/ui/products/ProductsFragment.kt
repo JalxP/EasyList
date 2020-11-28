@@ -13,26 +13,23 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import me.jalxp.easylist.adapters.ProductsListAdapter
 import me.jalxp.easylist.data.entities.Product
-import me.jalxp.easylist.data.entities.ShoppingList
 import me.jalxp.easylist.databinding.FragmentProductsBinding
 import me.jalxp.easylist.ui.categories.CategoriesViewModel
 import me.jalxp.easylist.ui.categories.CategoriesViewModelFactory
 import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModel
 import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModelFactory
 import me.jalxp.easylist.ui.shoppingList.EXTRA_LIST_ID
-import me.jalxp.easylist.ui.shoppingList.EXTRA_LIST_TITLE
-import me.jalxp.easylist.ui.shoppingList.SingleListActivity
 
 class ProductsFragment : Fragment() {
 
     private lateinit var binding: FragmentProductsBinding
-    private val productsViewModel: ProductsViewModel by activityViewModels {
+    private val productsViewModel: ProductsViewModel by viewModels {
         ProductsViewModelFactory(requireContext())
     }
-    private val measureUnitsViewModel: MeasurementUnitsViewModel by activityViewModels {
+    private val measureUnitsViewModel: MeasurementUnitsViewModel by viewModels {
         MeasurementUnitsViewModelFactory(requireContext())
     }
-    private val categoriesViewModel: CategoriesViewModel by activityViewModels {
+    private val categoriesViewModel: CategoriesViewModel by viewModels {
         CategoriesViewModelFactory(requireContext())
     }
 
@@ -43,8 +40,11 @@ class ProductsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         /* View Binding */
         binding = FragmentProductsBinding.inflate(layoutInflater, container, false)
+        if (savedInstanceState != null)
+            return binding.root
 
         shoppingListId = requireArguments().getLong(EXTRA_LIST_ID)
 
@@ -56,10 +56,11 @@ class ProductsFragment : Fragment() {
 
         with(binding) {
             recycleViewList.adapter = productsAdapter
-            recycleViewList.layoutManager = GridLayoutManager(this@ProductsFragment.context, 3)
+            val gridColumnCount = resources.getInteger(me.jalxp.easylist.R.integer.grid_column_count)
+            recycleViewList.layoutManager = GridLayoutManager(this@ProductsFragment.context, gridColumnCount)
         }
 
-        productsViewModel.productsLiveData.observe(viewLifecycleOwner, {
+        productsViewModel.getProductsByShoppingListId(shoppingListId!!).observe(viewLifecycleOwner, {
             it?.let {
                 productsAdapter.submitList(it as MutableList<Product>)
             }
@@ -89,7 +90,6 @@ class ProductsFragment : Fragment() {
 
                 addNewProduct(productName, productDescription, productQuantity, productMeasureUnit, productCategory, productBrand)
             }
-
         }
     }
 

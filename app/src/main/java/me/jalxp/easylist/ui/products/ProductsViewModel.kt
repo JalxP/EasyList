@@ -1,6 +1,7 @@
 package me.jalxp.easylist.ui.products
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import me.jalxp.easylist.data.AppDatabase
@@ -30,6 +31,10 @@ class ProductsViewModel(val dataSource: ProductDao) : ViewModel() {
         executorService.execute {
             dataSource.insertProduct(product)
         }
+    }
+
+    fun getProductsByShoppingListId(shoppingListId: Long) : LiveData<List<Product>> {
+        return dataSource.getProductsByShoppingListId(shoppingListId)
     }
 }
 

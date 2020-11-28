@@ -27,6 +27,7 @@ class SingleListActivity : AppCompatActivity(), OnItemSelectedListener {
         val selectedListTitle = intent.getStringExtra(EXTRA_LIST_TITLE)
 
         val bundle = Bundle()
+        bundle.putLong(EXTRA_LIST_ID, selectedListId)
         val productsFragment = ProductsFragment()
         productsFragment.arguments = bundle
 

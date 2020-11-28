@@ -29,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/amber_light"
+            android:maxLines="1"
             android:padding="@dimen/padding_small"
             android:textAlignment="center"
             tools:text="Cerveja" />
@@ -39,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/cyan"
+            android:maxLines="1"
             android:padding="@dimen/padding_tiny"
             android:textAlignment="center"
             tools:text="1 Pack" />

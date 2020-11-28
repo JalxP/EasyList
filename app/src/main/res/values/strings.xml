@@ -47,6 +47,8 @@
     <string name="unit">Unit</string>
     <string name="category">Category</string>
     <string name="need_name_error">Name is required.</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
 
     <string-array name="sort_by_array">
         <item>@string/default_sort</item>

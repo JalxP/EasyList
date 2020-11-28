@@ -43,7 +43,7 @@ class AddProductActivity : AppCompatActivity() {
         setSupportActionBar(binding.addProductListToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        // Populate dropdown lists
+        /* Populate dropdown lists */
         categoriesViewModel.categoriesLiveData.observe(this, Observer { dropdownData ->
             val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, dropdownData)
             (binding.categoryAutoComplete as? AutoCompleteTextView)?.setAdapter(adapter)
@@ -53,6 +53,8 @@ class AddProductActivity : AppCompatActivity() {
             val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, dropdownData)
             (binding.measurementUnitAutoComplete as? AutoCompleteTextView)?.setAdapter(adapter)
         })
+
+        /* Imageview select image / take photo */
 
         /* Float Action Button */
         binding.addProductButton.setOnClickListener {

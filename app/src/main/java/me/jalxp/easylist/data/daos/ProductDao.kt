@@ -16,6 +16,9 @@ interface ProductDao {
     @Query("SELECT * FROM product WHERE productId == :productId")
     fun getProductById(productId: Long) : LiveData<Product>
 
+    @Query("SELECT * FROM product WHERE shoppingListId == :shoppingListId")
+    fun getProductsByShoppingListId(shoppingListId: Long) : LiveData<List<Product>>
+
     @Insert
     fun insertProduct(product: Product)
 
