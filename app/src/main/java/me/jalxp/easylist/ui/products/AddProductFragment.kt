@@ -1,16 +1,24 @@
 package me.jalxp.easylist.ui.products
 
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import me.jalxp.easylist.ImageUtility
 import me.jalxp.easylist.R
 import me.jalxp.easylist.databinding.FragmentAddProductBinding
 import me.jalxp.easylist.ui.categories.CategoriesViewModel
@@ -19,10 +27,17 @@ import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModel
 import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModelFactory
 import me.jalxp.easylist.ui.shoppingList.EXTRA_LIST_ID
 
+
+const val GALLERY_REQUEST_CODE = 10
+const val CAMERA_REQUEST_CODE = 20
+const val GALLERY_PERMISSIONS_REQUEST_CODE = 100
+const val CAMERA_PERMISSIONS_REQUEST_CODE = 200
+
 class AddProductFragment : Fragment() {
 
     private lateinit var binding: FragmentAddProductBinding
     private var shoppingListId: Long? = null
+    private var filePath: String = ""
 
     private val productsViewModel: ProductsViewModel by activityViewModels {
         ProductsViewModelFactory(requireContext())
@@ -68,7 +83,9 @@ class AddProductFragment : Fragment() {
             })
 
         /* Imageview select image / take photo */
-        // TODO
+        binding.importImageButton.setOnClickListener {
+            selectImageFromGallery()
+        }
 
         /* Float Action Button */
         binding.addProductButton.setOnClickListener {
@@ -76,6 +93,104 @@ class AddProductFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        when (requestCode) {
+            GALLERY_REQUEST_CODE -> {
+                if (resultCode == Activity.RESULT_OK && data != null) {
+                    data.data?.apply {
+                        val cursor = requireActivity().contentResolver.query(
+                            this,
+                            arrayOf(MediaStore.Images.ImageColumns.DATA), null, null, null
+                        )
+                        if (cursor != null && cursor.moveToFirst())
+                            filePath = cursor.getString(0)
+                        ImageUtility.setPic(
+                            binding.productImageView,
+                            filePath
+                        )
+                    }
+                }
+            }
+            CAMERA_REQUEST_CODE -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    // TODO
+                }
+            }
+            else -> {
+                // Ignorar outros requestCodes
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
+    ) {
+        when (requestCode) {
+            CAMERA_PERMISSIONS_REQUEST_CODE -> {
+                if ((grantResults.isNotEmpty() &&
+                            grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                ) {
+                    // TODO
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "The camera feature is unavailable.",
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                }
+                return
+            }
+            GALLERY_PERMISSIONS_REQUEST_CODE -> {
+                if ((grantResults.isNotEmpty() &&
+                            grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                ) {
+                    selectImageFromGallery()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "The media selection feature is unavailable.",
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                }
+                return
+
+            }
+            else -> {
+                // Ignore all other requests.
+            }
+        }
+    }
+
+    private fun selectImageFromGallery() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED ||
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(), arrayOf(
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ), GALLERY_PERMISSIONS_REQUEST_CODE
+            )
+        } else {
+            val intent = Intent(Intent.ACTION_PICK).apply {
+                type = "image/*"
+            }
+            startActivityForResult(intent, GALLERY_REQUEST_CODE)
+        }
     }
 
     private fun addProductClicked() {
@@ -88,7 +203,8 @@ class AddProductFragment : Fragment() {
                 shoppingListId!!
             )
         ) {
-            binding.productNameTextLayout.error = getString(R.string.product_already_exists_on_list)
+            binding.productNameTextLayout.error =
+                getString(R.string.product_already_exists_on_list)
             return
         }
 
@@ -145,7 +261,7 @@ class AddProductFragment : Fragment() {
             shoppingListId!!,
             productBrand,
             null, // TODO
-            null // TODO
+            filePath
         )
     }
 }

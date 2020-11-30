@@ -2,13 +2,14 @@ package me.jalxp.easylist.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import me.jalxp.easylist.data.entities.MeasureUnit
-import me.jalxp.easylist.databinding.ProductItemBinding
+import me.jalxp.easylist.ImageUtility
 import me.jalxp.easylist.data.entities.Product
+import me.jalxp.easylist.databinding.ProductItemBinding
 import me.jalxp.easylist.ui.categories.CategoriesViewModel
 import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModel
 
@@ -28,6 +29,8 @@ class ProductsListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private var currentProduct: Product? = null
+        private var width = itemView .measuredWidth
+        private var height = itemView.measuredHeight
 
         init {
             itemView.setOnClickListener {
@@ -40,6 +43,13 @@ class ProductsListAdapter(
         fun bind(product: Product) {
             currentProduct = product
             binding.productNameTextView.text = product.name
+            binding.productImageView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+            width = binding.productImageView.measuredWidth
+            height = binding.productImageView.measuredHeight
+
+            Log.e("DEBUG", "w:$width, h:$height")
+            // TODO is the view inflated?
+            ImageUtility.setPic(binding.productImageView, product.imagePath, width, height)
 
             // Check if product has associated quantity and measurement units
             var quantityText = if (product.quantity != null) product.quantity.toString() else ""
