@@ -15,6 +15,9 @@ interface MeasureUnitDao {
     @Query("SELECT * FROM measureunit WHERE measureUnitId == :measureUnitId")
     fun getMeasureUnitById(measureUnitId: Long) : LiveData<MeasureUnit>
 
+    @Query("SELECT * FROM measureunit WHERE designation == :measureUnitDesignation")
+    fun getMeasurementUnitByDesignation(measureUnitDesignation: String) : LiveData<MeasureUnit>
+
     @Insert
     fun insertMeasureUnit(measureUnit: MeasureUnit)
 

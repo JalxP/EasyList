@@ -20,8 +20,8 @@
             android:icon="@drawable/twotone_bookmarks_black_24"
             android:title="@string/menu_categories" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_measurementUnits"
+            android:icon="@drawable/twotone_leaderboard_black_24"
+            android:title="@string/menu_measurementUnits" />
     </group>
 </menu>

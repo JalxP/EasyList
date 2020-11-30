@@ -6,26 +6,81 @@
     app:startDestination="@+id/nav_shoppinglists">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="me.jalxp.easylist.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
-
-    <fragment
         android:id="@+id/nav_shoppinglists"
         android:name="me.jalxp.easylist.ui.shoppingList.ShoppingListsFragment"
         android:label="@string/menu_shoppinglists"
-        tools:layout="@layout/fragment_shopping_lists"/>
+        tools:layout="@layout/fragment_shopping_lists" >
+        <action
+            android:id="@+id/action_nav_shoppinglists_to_addShoppingListFragment"
+            app:destination="@id/addShoppingListFragment" />
+        <action
+            android:id="@+id/action_nav_shoppinglists_to_singleListFragment"
+            app:destination="@id/singleListFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_categories"
         android:name="me.jalxp.easylist.ui.categories.CategoriesFragment"
         android:label="@string/menu_categories"
-        tools:layout="@layout/fragment_categories" />
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_nav_categories_to_addCategoryFragment"
+            app:destination="@id/addCategoryFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="me.jalxp.easylist.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_measurementUnits"
+        android:name="me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsFragment"
+        android:label="@string/menu_measurementUnits"
+        tools:layout="@layout/fragment_measurement_units" >
+        <action
+            android:id="@+id/action_nav_measurementUnits_to_addMeasurementUnitFragment"
+            app:destination="@id/addMeasurementUnitFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addMeasurementUnitFragment"
+        android:name="me.jalxp.easylist.ui.measurementUnits.AddMeasurementUnitFragment"
+        android:label="fragment_add_measurement_unit"
+        tools:layout="@layout/fragment_add_measurement_unit" >
+        <action
+            android:id="@+id/action_addMeasurementUnitFragment_to_nav_measurementUnits"
+            app:destination="@id/nav_measurementUnits" />
+    </fragment>
+    <fragment
+        android:id="@+id/addShoppingListFragment"
+        android:name="me.jalxp.easylist.ui.shoppingList.AddShoppingListFragment"
+        android:label="fragment_add_shopping_list"
+        tools:layout="@layout/fragment_add_shopping_list" >
+        <action
+            android:id="@+id/action_addShoppingListFragment_to_nav_shoppinglists"
+            app:destination="@id/nav_shoppinglists" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCategoryFragment"
+        android:name="me.jalxp.easylist.ui.categories.AddCategoryFragment"
+        android:label="fragment_add_category"
+        tools:layout="@layout/fragment_add_category" >
+        <action
+            android:id="@+id/action_addCategoryFragment_to_nav_categories"
+            app:destination="@id/nav_categories" />
+    </fragment>
+    <fragment
+        android:id="@+id/singleListFragment"
+        android:name="me.jalxp.easylist.ui.shoppingList.SingleListFragment"
+        android:label="fragment_single_list"
+        tools:layout="@layout/fragment_single_list" >
+        <action
+            android:id="@+id/action_singleListFragment_to_addProductFragment"
+            app:destination="@id/addProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addProductFragment"
+        android:name="me.jalxp.easylist.ui.products.AddProductFragment"
+        android:label="fragment_add_product"
+        tools:layout="@layout/fragment_add_product" >
+        <action
+            android:id="@+id/action_addProductFragment_to_singleListFragment"
+            app:destination="@id/singleListFragment"
+            app:popUpTo="@id/nav_shoppinglists" />
+    </fragment>
 </navigation>

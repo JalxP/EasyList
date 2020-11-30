@@ -14,12 +14,18 @@ class MeasurementUnitsViewModel(val dataSource: MeasureUnitDao) : ViewModel() {
 
     private val executorService = Executors.newSingleThreadExecutor()
 
-    fun insertNewMeasurementUnit() {
-        // TODO
+    fun insertNewMeasurementUnit(designation: String) {
+        executorService.execute {
+            dataSource.insertMeasureUnit(MeasureUnit(designation))
+        }
     }
 
     fun getMeasurementUnitById(measurementUnitId: Long) : LiveData<MeasureUnit> {
         return dataSource.getMeasureUnitById(measurementUnitId)
+    }
+
+    fun getMeasurementUnitByDesignation(measurementUnitDesignation: String) : LiveData<MeasureUnit> {
+        return dataSource.getMeasurementUnitByDesignation(measurementUnitDesignation)
     }
 }
 

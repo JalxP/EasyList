@@ -22,6 +22,10 @@ class CategoriesViewModel(val dataSource: CategoryDao) : ViewModel() {
         }
     }
 
+    fun getCategoryByDesignation(categoryDesignation: String) : LiveData<Category> {
+        return dataSource.getCategoryByDesignation(categoryDesignation)
+    }
+
     fun deleteCategory(category: Category) {
 
         // TODO only delete if it has no products associated!!

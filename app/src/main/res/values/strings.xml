@@ -12,6 +12,7 @@
 
     <string name="menu_shoppinglists">Shopping Lists</string>
     <string name="menu_categories">Categories</string>
+    <string name="menu_measurementUnits">Measurement Units</string>
 
     <string name="edit_image_button">Edit Image Button</string>
     <string name="delete_image_button">Delete Image Button</string>
@@ -27,6 +28,7 @@
     <string name="activity_all_lists">Shopping Lists</string>
     <string name="activity_create_list">Create Shopping List</string>
     <string name="activity_add_category">Add Category</string>
+    <string name="title_activity_add_measurement_unit">Add Measurement Unit</string>
 
     <string name="scanner">Scanner</string>
     <string name="about">About</string>
@@ -41,8 +43,11 @@
     <string name="add_button">Add</string>
     <string name="activity_add_product">Add Product</string>
     <string name="create_category_button">Create category button</string>
+    <string name="create_measurementUnit_button">Create measurement unit button</string>
     <string name="add_category">Add Category</string>
+    <string name="add_measurement">Add Measurement Unit</string>
     <string name="description">Description</string>
+    <string name="designation">Designation</string>
     <string name="add">Add</string>
     <string name="quantity">Quantity</string>
     <string name="unit">Unit</string>
@@ -52,13 +57,28 @@
 
     <!-- Input Error Messages -->
     <string name="need_name_error">Name is required.</string>
+    <string name="product_already_exists_on_list">This product already exists on this list.</string>
     <string name="need_description_error">Description is required.</string>
+    <string name="need_designation_error">Designation is required.</string>
+    <string name="measurement_already_exists_error">Measurement unit already exists.</string>
+    <string name="category_already_exists_error">Category already exists.</string>
 
     <string-array name="sort_by_array">
         <item>@string/default_sort</item>
         <item>@string/category_sort</item>
         <item>@string/purchase_sort</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 
 </resources>

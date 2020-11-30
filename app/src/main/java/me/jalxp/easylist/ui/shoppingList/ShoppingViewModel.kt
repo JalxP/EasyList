@@ -14,11 +14,12 @@ class ShoppingViewModel(val dataSource: ShoppingListDao) : ViewModel() {
     private val executorService = Executors.newSingleThreadExecutor()
 
     fun insertNewShoppingList(listTitle: String, baseShoppingList: ShoppingList?) {
-        // TODO create new shopping list based on baseShoppingList
-        if (baseShoppingList == null) {
-            executorService.execute {
-                dataSource.insertShoppingList(ShoppingList(listTitle))
-            }
+        // TODO
+    }
+
+    fun insertNewShoppingList(listTitle: String) {
+        executorService.execute {
+            dataSource.insertShoppingList(ShoppingList(listTitle))
         }
     }
 

@@ -1,6 +1,7 @@
 package me.jalxp.easylist.ui.products
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -9,8 +10,7 @@ import me.jalxp.easylist.data.daos.ProductDao
 import me.jalxp.easylist.data.entities.Product
 import java.util.concurrent.Executors
 
-// TODO Finish me
-//
+
 class ProductsViewModel(val dataSource: ProductDao) : ViewModel() {
     val productsLiveData = dataSource.getAllProducts()
 
@@ -31,6 +31,14 @@ class ProductsViewModel(val dataSource: ProductDao) : ViewModel() {
         executorService.execute {
             dataSource.insertProduct(product)
         }
+    }
+
+    fun productAlreadyExistsInTheShoppingList(productName: String, shoppingListId: Long) : Boolean {
+        dataSource.getProductsByShoppingListIdNonLive(shoppingListId).forEach {
+            if (it.name.equals(productName, true))
+                return true
+        }
+        return false
     }
 
     fun getProductsByShoppingListId(shoppingListId: Long) : LiveData<List<Product>> {

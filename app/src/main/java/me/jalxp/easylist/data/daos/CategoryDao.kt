@@ -16,6 +16,9 @@ interface CategoryDao {
     @Query("SELECT * FROM category WHERE categoryId == :categoryId")
     fun getCategoryById(categoryId: Long) : LiveData<Category>
 
+    @Query("SELECT * FROM category WHERE designation == :categoryDesignation")
+    fun getCategoryByDesignation(categoryDesignation: String) : LiveData<Category>
+
     @Insert
     fun insertCategory(category: Category)
 

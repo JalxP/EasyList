@@ -4,29 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.shoppingList.AddShoppingListActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/create_shopping_list_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".ui.shoppingList.AddShoppingListFragment">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin"
-        android:layout_marginTop="@dimen/margin"
         android:layout_marginEnd="@dimen/margin"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_shopping_list_toolbar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView"
@@ -37,10 +25,12 @@
             android:textAlignment="center" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/shoppingListInputLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="@dimen/padding"
-            android:paddingBottom="@dimen/padding">
+            android:paddingBottom="@dimen/padding"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/create_shopping_list_title"

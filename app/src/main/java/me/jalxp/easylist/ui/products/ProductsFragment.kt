@@ -1,15 +1,15 @@
 package me.jalxp.easylist.ui.products
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import me.jalxp.easylist.R
 import me.jalxp.easylist.adapters.ProductsListAdapter
 import me.jalxp.easylist.data.entities.Product
 import me.jalxp.easylist.databinding.FragmentProductsBinding
@@ -22,17 +22,16 @@ import me.jalxp.easylist.ui.shoppingList.EXTRA_LIST_ID
 class ProductsFragment : Fragment() {
 
     private lateinit var binding: FragmentProductsBinding
-    private val productsViewModel: ProductsViewModel by viewModels {
+    private val productsViewModel: ProductsViewModel by activityViewModels {
         ProductsViewModelFactory(requireContext())
     }
-    private val measureUnitsViewModel: MeasurementUnitsViewModel by viewModels {
+    private val measureUnitsViewModel: MeasurementUnitsViewModel by activityViewModels {
         MeasurementUnitsViewModelFactory(requireContext())
     }
-    private val categoriesViewModel: CategoriesViewModel by viewModels {
+    private val categoriesViewModel: CategoriesViewModel by activityViewModels {
         CategoriesViewModelFactory(requireContext())
     }
 
-    private val addProductActivityRequestCode = 1
     private var shoppingListId: Long? = null
 
     override fun onCreateView(
@@ -55,63 +54,28 @@ class ProductsFragment : Fragment() {
 
         with(binding) {
             recycleViewList.adapter = productsAdapter
-            val gridColumnCount = resources.getInteger(me.jalxp.easylist.R.integer.grid_column_count)
-            recycleViewList.layoutManager = GridLayoutManager(this@ProductsFragment.context, gridColumnCount)
+            val gridColumnCount =
+                resources.getInteger(me.jalxp.easylist.R.integer.grid_column_count)
+            recycleViewList.layoutManager =
+                GridLayoutManager(this@ProductsFragment.context, gridColumnCount)
         }
 
-        productsViewModel.getProductsByShoppingListId(shoppingListId!!).observe(viewLifecycleOwner, {
-            it?.let {
-                productsAdapter.submitList(it as MutableList<Product>)
-            }
-        })
+        productsViewModel.getProductsByShoppingListId(shoppingListId!!)
+            .observe(viewLifecycleOwner, {
+                it?.let {
+                    productsAdapter.submitList(it as MutableList<Product>)
+                }
+            })
 
         /* Floating Button */
-        binding.addProductFab.setOnClickListener {
-            addProductOnClick()
+        binding.addProductFab.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_singleListFragment_to_addProductFragment, arguments)
         }
 
         return binding.root
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intentData)
-        Log.e("<Products Fragment>", "RequestCode: $requestCode resultCode == OK: ${resultCode == Activity.RESULT_OK}")
-
-        if (requestCode == addProductActivityRequestCode && resultCode == Activity.RESULT_OK)
-        {
-            intentData?.let { data ->
-                val productName = data.getStringExtra(PRODUCT_NAME) ?: ""
-                val productDescription = data.getStringExtra(PRODUCT_DESCRIPTION) ?: ""
-                val productQuantity = data.getIntExtra(PRODUCT_QUANTITY, 1)
-                val productMeasureUnit = data.getStringExtra(PRODUCT_MEASUREMENT_UNIT) ?: ""
-                val productCategory = data.getStringExtra(PRODUCT_CATEGORY) ?: ""
-                val productBrand = data.getStringExtra(PRODUCT_BRAND) ?: ""
-
-                addNewProduct(productName, productDescription, productQuantity, productMeasureUnit, productCategory, productBrand)
-            }
-        }
-    }
-
-    private fun addNewProduct(
-        productName: String,
-        productDescription: String,
-        productQuantity: Int,
-        productMeasureUnit: String,
-        productCategory: String,
-        productBrand: String
-    ) {
-        // TODO
-        productsViewModel.insertNewProduct(productName, productDescription, productQuantity, null, null, shoppingListId!!, productBrand, null, null)
-    }
-
     private fun adapterOnItemClick(product: Product) {
         // TODO
     }
-
-    private fun addProductOnClick() {
-        val intent = Intent(context, AddProductActivity::class.java)
-        startActivityForResult(intent, addProductActivityRequestCode)
-    }
-
-
 }

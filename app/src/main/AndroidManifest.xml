@@ -9,6 +9,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyList">
         <activity
+            android:name=".ui.measurementUnits.AddMeasurementUnitActivity"
+            android:label="@string/title_activity_add_measurement_unit"
+            android:theme="@style/Theme.EasyList.NoActionBar"></activity>
+        <activity
             android:name=".ui.categories.AddCategoryActivity"
             android:theme="@style/Theme.EasyList.NoActionBar" />
         <activity

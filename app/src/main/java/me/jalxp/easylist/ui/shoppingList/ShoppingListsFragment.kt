@@ -1,6 +1,5 @@
 package me.jalxp.easylist.ui.shoppingList
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,10 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import me.jalxp.easylist.R
 import me.jalxp.easylist.adapters.ShoppingListsAdapter
 import me.jalxp.easylist.databinding.FragmentShoppingListsBinding
 import me.jalxp.easylist.data.entities.ShoppingList
+import me.jalxp.easylist.ui.products.ProductsFragment
 
 const val EXTRA_LIST_ID = "extra list id"
 const val EXTRA_LIST_TITLE = "extra list name"
@@ -21,7 +24,6 @@ const val EXTRA_LIST_TITLE = "extra list name"
 class ShoppingListsFragment : Fragment() {
 
     private lateinit var binding: FragmentShoppingListsBinding
-    private val newListActivityRequestCode = 1
     private val shoppingViewModel: ShoppingViewModel by viewModels {
         ShoppingListViewModelFactory(requireContext())
     }
@@ -53,35 +55,18 @@ class ShoppingListsFragment : Fragment() {
         })
 
         /* Float Action Button */
-        binding.createListFab.setOnClickListener {
-            createListOnClick()
+        binding.createListFab.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_nav_shoppinglists_to_addShoppingListFragment)
         }
 
         return binding.root
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intentData)
-
-        if (requestCode == newListActivityRequestCode && resultCode == Activity.RESULT_OK) {
-            intentData?.let { data ->
-
-                val listTitle = data.getStringExtra(LIST_TITLE)
-                if (listTitle != null)
-                    shoppingViewModel.insertNewShoppingList(listTitle, null)
-            }
-        }
-    }
-
     private fun adapterOnItemClick(shoppingList: ShoppingList) {
-        val intent = Intent(context, SingleListActivity::class.java)
-        Log.e(
-            "<DEBUG>",
-            "adapterOnItemClick: shoppingList: title=${shoppingList.title}, id=${shoppingList.shoppingListId}"
-        )
-        intent.putExtra(EXTRA_LIST_ID, shoppingList.shoppingListId)
-        intent.putExtra(EXTRA_LIST_TITLE, shoppingList.title)
-        startActivity(intent)
+        val bundle = Bundle()
+        bundle.putLong(EXTRA_LIST_ID, shoppingList.shoppingListId)
+        bundle.putString(EXTRA_LIST_TITLE, shoppingList.title)
+        findNavController().navigate(R.id.action_nav_shoppinglists_to_singleListFragment, bundle)
     }
 
     private fun adapterOnEditClick(shoppingList: ShoppingList) {
@@ -92,10 +77,5 @@ class ShoppingListsFragment : Fragment() {
     private fun adapterOnDeleteClick(shoppingList: ShoppingList) {
         // TODO pop up to confirm?
         shoppingViewModel.removeShoppingList(shoppingList)
-    }
-
-    private fun createListOnClick() {
-        val intent = Intent(context, AddShoppingListActivity::class.java)
-        startActivityForResult(intent, newListActivityRequestCode)
     }
 }
