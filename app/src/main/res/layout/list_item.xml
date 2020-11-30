@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/margin_small"
+    android:layout_marginTop="@dimen/margin_tiny"
     app:cardCornerRadius="6dp"
     app:cardElevation="2dp">
 
@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:background="@color/cyan_light"
+            android:maxLines="1"
             android:padding="@dimen/padding_small"
             android:textColor="@color/black"
             tools:text="List Item" />
@@ -30,22 +31,25 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="end"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_small">
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/editImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/edit_image_button"
-                app:srcCompat="@android:drawable/ic_menu_edit" />
+                app:srcCompat="@drawable/twotone_create_24" />
 
             <ImageButton
                 android:id="@+id/deleteImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/delete_image_button"
-                app:srcCompat="@android:drawable/ic_menu_delete" />
+                android:tint="#B71C1C"
+                app:srcCompat="@drawable/twotone_delete_24" />
 
         </LinearLayout>
     </LinearLayout>

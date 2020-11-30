@@ -55,7 +55,7 @@ class AddMeasurementUnitFragment : Fragment() {
         val measures =  measurementUnitsViewModel.measurementUnitsLiveData.value
 
         measures?.forEach {
-            if (it.designation == measurementDesignation)
+            if (it.designation.equals(measurementDesignation,true))
                 return true
         }
         return false

@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.nav_home,
+                R.id.nav_products,
                 R.id.nav_categories,
                 R.id.nav_measurementUnits,
                 R.id.nav_shoppinglists), drawerLayout)

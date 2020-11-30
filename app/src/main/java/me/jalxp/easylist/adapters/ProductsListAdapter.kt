@@ -1,5 +1,6 @@
 package me.jalxp.easylist.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -44,7 +45,7 @@ class ProductsListAdapter(
             var quantityText = if (product.quantity != null) product.quantity.toString() else ""
             if (product.measureUnitId != null) {
                 val measureUnit =
-                    measurementUnitsViewModel.getMeasurementUnitById(product.measureUnitId!!).value as MeasureUnit
+                    measurementUnitsViewModel.getMeasurementUnitById(product.measureUnitId!!)
                 quantityText += " " + measureUnit.designation
             }
             binding.productQuantityTextView.text = quantityText

@@ -129,7 +129,7 @@ class AddProductFragment : Fragment() {
         var productMeasureUnitId: Long? = null
         if (productMeasureUnit.isNotEmpty())
             productMeasureUnitId =
-                measurementUnitsViewModel.getMeasurementUnitByDesignation(productMeasureUnit).value?.measureUnitId
+                measurementUnitsViewModel.getMeasurementUnitByDesignation(productMeasureUnit)?.measureUnitId
 
         var productCategoryId: Long? = null
         if (productCategory.isNotEmpty())

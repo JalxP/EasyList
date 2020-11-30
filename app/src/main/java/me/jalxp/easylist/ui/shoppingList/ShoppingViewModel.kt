@@ -8,7 +8,7 @@ import me.jalxp.easylist.data.entities.ShoppingList
 import me.jalxp.easylist.data.daos.ShoppingListDao
 import java.util.concurrent.Executors
 
-class ShoppingViewModel(val dataSource: ShoppingListDao) : ViewModel() {
+class ShoppingViewModel(private val dataSource: ShoppingListDao) : ViewModel() {
     val shoppingListsLiveData = dataSource.getAllShoppingLists()
 
     private val executorService = Executors.newSingleThreadExecutor()
@@ -27,6 +27,10 @@ class ShoppingViewModel(val dataSource: ShoppingListDao) : ViewModel() {
         executorService.execute {
             dataSource.deleteShoppingList(shoppingList)
         }
+    }
+
+    fun shoppingListAlreadyExists(listTitle: String) : Boolean{
+        return dataSource.getShoppingListByTitle(listTitle).isNotEmpty()
     }
 }
 

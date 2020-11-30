@@ -13,10 +13,10 @@ interface MeasureUnitDao {
     fun getAllMeasureUnits(): LiveData<List<MeasureUnit>>
 
     @Query("SELECT * FROM measureunit WHERE measureUnitId == :measureUnitId")
-    fun getMeasureUnitById(measureUnitId: Long) : LiveData<MeasureUnit>
+    fun getMeasureUnitById(measureUnitId: Long) : MeasureUnit
 
     @Query("SELECT * FROM measureunit WHERE designation == :measureUnitDesignation")
-    fun getMeasurementUnitByDesignation(measureUnitDesignation: String) : LiveData<MeasureUnit>
+    fun getMeasurementUnitByDesignation(measureUnitDesignation: String) : MeasureUnit
 
     @Insert
     fun insertMeasureUnit(measureUnit: MeasureUnit)

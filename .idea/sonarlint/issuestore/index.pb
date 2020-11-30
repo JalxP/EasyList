@@ -15,8 +15,6 @@ q
 Aapp/src/main/java/me/jalxp/easylist/data/entities/ShoppingList.kt,d/8/d821a1e38d9056019b6778f7e2d2739cc8b33675
 p
 @app/src/main/java/me/jalxp/easylist/data/daos/ShoppingListDao.kt,f/0/f0302776e9ecb7e5a70e1cc0b49ec6e1cee9a64b
-c
-3app/src/main/res/layout/fragment_shopping_lists.xml,4/4/4473cc10d3115c46680ed3a7f40fad6aa5fdab1c
 u
 Eapp/src/main/java/me/jalxp/easylist/adapters/CategoriesListAdapter.kt,6/1/61a55c1c52760e9b128d4cfe51f5d2f647e444a8
 r

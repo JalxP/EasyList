@@ -9,24 +9,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyList">
         <activity
-            android:name=".ui.measurementUnits.AddMeasurementUnitActivity"
-            android:label="@string/title_activity_add_measurement_unit"
-            android:theme="@style/Theme.EasyList.NoActionBar"></activity>
-        <activity
-            android:name=".ui.categories.AddCategoryActivity"
-            android:theme="@style/Theme.EasyList.NoActionBar" />
-        <activity
-            android:name=".ui.products.AddProductActivity"
-            android:theme="@style/Theme.EasyList.NoActionBar" />
-        <activity
-            android:name=".ui.shoppingList.SingleListActivity"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.EasyList.NoActionBar" />
-        <activity
-            android:name=".ui.shoppingList.AddShoppingListActivity"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.EasyList.NoActionBar" />
-        <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.EasyList.NoActionBar">

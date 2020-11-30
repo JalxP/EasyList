@@ -13,6 +13,9 @@ interface ShoppingListDao {
     @Query("SELECT * FROM shoppinglist WHERE shoppingListId == :shoppingListId")
     fun getShoppingListById(shoppingListId: Long) : LiveData<ShoppingList>
 
+    @Query("SELECT * FROM shoppinglist WHERE title LIKE :listTitle")
+    fun getShoppingListByTitle(listTitle: String) : List<ShoppingList>
+
     @Insert
     fun insertShoppingList(shoppingList: ShoppingList)
 

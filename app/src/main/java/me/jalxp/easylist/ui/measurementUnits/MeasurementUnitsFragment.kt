@@ -70,7 +70,6 @@ class MeasurementUnitsFragment : Fragment() {
     }
 
     private fun adapterOnDeleteClick(measureUnit: MeasureUnit) {
-
         // TODO
     }
 }

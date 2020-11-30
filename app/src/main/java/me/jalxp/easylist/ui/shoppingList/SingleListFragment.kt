@@ -1,13 +1,15 @@
 package me.jalxp.easylist.ui.shoppingList
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import me.jalxp.easylist.R
 import me.jalxp.easylist.databinding.FragmentSingleListBinding
 import me.jalxp.easylist.ui.products.ProductsFragment
@@ -22,12 +24,14 @@ class SingleListFragment : Fragment(), OnItemSelectedListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = FragmentSingleListBinding.inflate(inflater, container, false)
 
         val productsFragment = ProductsFragment()
         productsFragment.arguments = arguments
+        findNavController().currentDestination?.label = arguments?.getString(EXTRA_LIST_TITLE)
 
-        childFragmentManager.beginTransaction().add(
+        parentFragmentManager.beginTransaction().add(
             R.id.products_frame, productsFragment
         ).commit()
 
@@ -42,7 +46,6 @@ class SingleListFragment : Fragment(), OnItemSelectedListener {
             sortBySpinner.adapter = adapter
             sortBySpinner.onItemSelectedListener = this@SingleListFragment
         }
-
 
         return binding.root
     }

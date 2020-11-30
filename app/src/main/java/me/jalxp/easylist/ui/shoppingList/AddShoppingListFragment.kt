@@ -33,12 +33,19 @@ class AddShoppingListFragment : Fragment() {
     private fun createShoppingList() {
         val listTitle = binding.createShoppingListTitle.text.toString()
 
-        if (listTitle.isEmpty()) {
-            binding.shoppingListInputLayout.error = getString(R.string.need_name_error)
-            return
-        } else {
-            shoppingViewModel.insertNewShoppingList(listTitle)
-            findNavController().navigate(R.id.action_addShoppingListFragment_to_nav_shoppinglists)
+        when {
+            listTitle.isEmpty() -> {
+                binding.shoppingListInputLayout.error = getString(R.string.need_name_error)
+                return
+            }
+            shoppingViewModel.shoppingListAlreadyExists(listTitle) -> {
+                binding.shoppingListInputLayout.error = getString(R.string.shopping_list_already_exists)
+                return
+            }
+            else -> {
+                shoppingViewModel.insertNewShoppingList(listTitle)
+                findNavController().navigate(R.id.action_addShoppingListFragment_to_nav_shoppinglists)
+            }
         }
     }
 }

@@ -20,11 +20,11 @@ class MeasurementUnitsViewModel(val dataSource: MeasureUnitDao) : ViewModel() {
         }
     }
 
-    fun getMeasurementUnitById(measurementUnitId: Long) : LiveData<MeasureUnit> {
+    fun getMeasurementUnitById(measurementUnitId: Long) : MeasureUnit {
         return dataSource.getMeasureUnitById(measurementUnitId)
     }
 
-    fun getMeasurementUnitByDesignation(measurementUnitDesignation: String) : LiveData<MeasureUnit> {
+    fun getMeasurementUnitByDesignation(measurementUnitDesignation: String) : MeasureUnit {
         return dataSource.getMeasurementUnitByDesignation(measurementUnitDesignation)
     }
 }
