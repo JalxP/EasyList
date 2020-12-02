@@ -29,7 +29,6 @@
     <string name="purchase_sort">Purchased</string>
 
 
-
     <string name="scanner">Scanner</string>
     <string name="about">About</string>
     <string name="search">Search</string>
@@ -69,5 +68,9 @@
         <item>@string/category_sort</item>
         <item>@string/purchase_sort</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="copy_from_hint">Copy From</string>
+    <string name="default_none_value">None</string>
 
 </resources>

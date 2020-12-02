@@ -10,8 +10,8 @@ import me.jalxp.easylist.data.entities.Product
 @Dao
 interface ProductDao {
 
-    @Query("SELECT * FROM product")
-    fun getAllProducts(): LiveData<List<Product>>
+    @Query("SELECT * FROM product GROUP BY name")
+    fun getAllProducts(): LiveData<List<Product>> // TODO return distinct check this
 
     @Query("SELECT * FROM product WHERE productId == :productId")
     fun getProductById(productId: Long) : LiveData<Product>

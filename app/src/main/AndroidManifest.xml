@@ -11,7 +11,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EasyList">
+        android:theme="@style/Theme.EasyList"
+        android:requestLegacyExternalStorage="true">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

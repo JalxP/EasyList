@@ -17,4 +17,5 @@ data class Product(
 ) {
     @PrimaryKey(autoGenerate = true)
     var productId: Long = 0L
+
 }

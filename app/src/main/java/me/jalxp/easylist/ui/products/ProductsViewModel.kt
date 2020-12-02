@@ -1,7 +1,6 @@
 package me.jalxp.easylist.ui.products
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -10,9 +9,7 @@ import me.jalxp.easylist.data.daos.ProductDao
 import me.jalxp.easylist.data.entities.Product
 import java.util.concurrent.Executors
 
-
 class ProductsViewModel(val dataSource: ProductDao) : ViewModel() {
-    val productsLiveData = dataSource.getAllProducts()
 
     private val executorService = Executors.newSingleThreadExecutor()
 
@@ -27,6 +24,7 @@ class ProductsViewModel(val dataSource: ProductDao) : ViewModel() {
         barCode: Double?,
         imagePath: String?
     ) {
+
         val product = Product(name, description, quantity, measureUnitId, categoryId, shoppingListId, brand, barCode, imagePath)
         executorService.execute {
             dataSource.insertProduct(product)
@@ -41,8 +39,16 @@ class ProductsViewModel(val dataSource: ProductDao) : ViewModel() {
         return false
     }
 
+    fun getAllProducts() : LiveData<List<Product>> {
+        return dataSource.getAllProducts()
+    }
+
     fun getProductsByShoppingListId(shoppingListId: Long) : LiveData<List<Product>> {
         return dataSource.getProductsByShoppingListId(shoppingListId)
+    }
+
+    fun getProductsByShoppingListIdNonLive(shoppingListId: Long) : List<Product> {
+        return dataSource.getProductsByShoppingListIdNonLive(shoppingListId)
     }
 }
 

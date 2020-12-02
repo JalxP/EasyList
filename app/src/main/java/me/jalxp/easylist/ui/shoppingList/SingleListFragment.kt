@@ -1,9 +1,7 @@
 package me.jalxp.easylist.ui.shoppingList
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
@@ -12,7 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import me.jalxp.easylist.R
 import me.jalxp.easylist.databinding.FragmentSingleListBinding
-import me.jalxp.easylist.ui.products.ProductsFragment
+import me.jalxp.easylist.ui.products.ProductsContainerFragment
+import me.jalxp.easylist.ui.products.SHOW_PRODUCTS_BY_LIST
+import me.jalxp.easylist.ui.products.VIEW_TYPE
 
 class SingleListFragment : Fragment(), OnItemSelectedListener {
 
@@ -27,12 +27,17 @@ class SingleListFragment : Fragment(), OnItemSelectedListener {
 
         binding = FragmentSingleListBinding.inflate(inflater, container, false)
 
-        val productsFragment = ProductsFragment()
-        productsFragment.arguments = arguments
+        val shoppingListId = requireArguments().getLong(EXTRA_LIST_ID)
+        val productsContainerFragment = ProductsContainerFragment()
+        val productFragmentArguments = Bundle().apply {
+            putInt(VIEW_TYPE, SHOW_PRODUCTS_BY_LIST)
+            putLong(EXTRA_LIST_ID, shoppingListId)
+        }
+        productsContainerFragment.arguments = productFragmentArguments
         findNavController().currentDestination?.label = arguments?.getString(EXTRA_LIST_TITLE)
 
         parentFragmentManager.beginTransaction().add(
-            R.id.products_frame, productsFragment
+            R.id.products_frame, productsContainerFragment
         ).commit()
 
         /* Spinner */

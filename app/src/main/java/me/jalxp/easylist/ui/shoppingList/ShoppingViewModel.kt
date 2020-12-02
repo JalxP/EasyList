@@ -13,14 +13,19 @@ class ShoppingViewModel(private val dataSource: ShoppingListDao) : ViewModel() {
 
     private val executorService = Executors.newSingleThreadExecutor()
 
-    fun insertNewShoppingList(listTitle: String, baseShoppingList: ShoppingList?) {
-        // TODO
+    fun insertNewShoppingList(listTitle: String) {
+            dataSource.insertShoppingList(ShoppingList(listTitle))
     }
 
-    fun insertNewShoppingList(listTitle: String) {
-        executorService.execute {
-            dataSource.insertShoppingList(ShoppingList(listTitle))
-        }
+    fun getAllShoppingListsNonLive() : List<ShoppingList> {
+        return dataSource.getAllShoppingListsNonLive()
+    }
+
+    fun getShoppingListIdFromName(shoppingListName: String) : Long? {
+        val list = dataSource.getShoppingListByTitle(shoppingListName)
+        if (list.isEmpty())
+            return null
+        return list.first().shoppingListId
     }
 
     fun removeShoppingList(shoppingList: ShoppingList) {

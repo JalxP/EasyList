@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import me.jalxp.easylist.R
 import me.jalxp.easylist.adapters.ShoppingListsAdapter
 import me.jalxp.easylist.databinding.FragmentShoppingListsBinding
@@ -17,6 +18,7 @@ import me.jalxp.easylist.data.entities.ShoppingList
 
 const val EXTRA_LIST_ID = "extra list id"
 const val EXTRA_LIST_TITLE = "extra list name"
+const val EXTRA_PRODUCT_ID = "extra product id"
 
 class ShoppingListsFragment : Fragment() {
 
@@ -68,7 +70,7 @@ class ShoppingListsFragment : Fragment() {
 
     private fun adapterOnEditClick(shoppingList: ShoppingList) {
         // TODO allow shoppingList edit here.
-        Toast.makeText(context, "adapterOnEditClick", Toast.LENGTH_LONG).show()
+        Snackbar.make(binding.root, "Vai passear pá", Snackbar.LENGTH_LONG).show()
     }
 
     private fun adapterOnDeleteClick(shoppingList: ShoppingList) {

@@ -39,6 +39,12 @@
     </fragment>
 
     <fragment
+        android:id="@+id/nav_products"
+        android:name="me.jalxp.easylist.ui.products.ProductsFragment"
+        android:label="@string/menu_products"
+        tools:layout="@layout/fragment_products"/>
+
+    <fragment
         android:id="@+id/addMeasurementUnitFragment"
         android:name="me.jalxp.easylist.ui.measurementUnits.AddMeasurementUnitFragment"
         android:label="@string/fragment_add_measurementUnits"
@@ -75,6 +81,9 @@
         <action
             android:id="@+id/action_singleListFragment_to_addProductFragment"
             app:destination="@id/addProductFragment" />
+        <action
+            android:id="@+id/action_singleListFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
     </fragment>
 
     <fragment
@@ -88,4 +97,11 @@
             app:popUpTo="@id/singleListFragment"
             app:popUpToInclusive="true" />
     </fragment>
+
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="me.jalxp.easylist.ui.products.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" />
+
 </navigation>

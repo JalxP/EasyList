@@ -9,4 +9,6 @@ data class ShoppingList(
 ) {
     @PrimaryKey(autoGenerate = true)
     var shoppingListId: Long = 0L
+
+    override fun toString(): String = title
 }

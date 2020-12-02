@@ -1,5 +1,6 @@
 package me.jalxp.easylist
 
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.util.Log
@@ -16,7 +17,6 @@ class ImageUtility {
             val targetW = view.width
             val targetH = view.height
             if (targetH < 1 || targetW < 1) {
-                Log.e("<ImageUtility>", "The view is 0x0")
                 return
             }
             val bmpOptions = BitmapFactory.Options()
@@ -42,6 +42,7 @@ class ImageUtility {
                 return
             }
             val bmpOptions = BitmapFactory.Options()
+            bmpOptions.inPreferredConfig = Bitmap.Config.RGB_565
             bmpOptions.inJustDecodeBounds = true
             BitmapFactory.decodeFile(path)
             val photoW = bmpOptions.outWidth
