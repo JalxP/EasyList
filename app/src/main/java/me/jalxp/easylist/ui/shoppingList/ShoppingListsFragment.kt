@@ -65,6 +65,7 @@ class ShoppingListsFragment : Fragment() {
         val bundle = Bundle()
         bundle.putLong(EXTRA_LIST_ID, shoppingList.shoppingListId)
         bundle.putString(EXTRA_LIST_TITLE, shoppingList.title)
+
         findNavController().navigate(R.id.action_nav_shoppinglists_to_singleListFragment, bundle)
     }
 

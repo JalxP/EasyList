@@ -10,12 +10,12 @@ data class Product(
     var quantity: Int?,
     var measureUnitId: Long?,
     var categoryId: Long?,
-    var shoppingListId: Long,
+    var shoppingListId: Long?,
     var brand: String?,
     var barCode: Double?,
     var imagePath: String?
 ) {
     @PrimaryKey(autoGenerate = true)
     var productId: Long = 0L
-
+    var onCart: Boolean = false
 }

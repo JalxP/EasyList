@@ -19,21 +19,28 @@ class ProductsViewModel(val dataSource: ProductDao) : ViewModel() {
         quantity: Int,
         measureUnitId: Long?,
         categoryId: Long?,
-        shoppingListId: Long,
+        shoppingListId: Long?,
         brand: String?,
         barCode: Double?,
         imagePath: String?
     ) {
-
         val product = Product(name, description, quantity, measureUnitId, categoryId, shoppingListId, brand, barCode, imagePath)
         executorService.execute {
             dataSource.insertProduct(product)
         }
     }
 
-    fun productAlreadyExistsInTheShoppingList(productName: String, shoppingListId: Long) : Boolean {
+    fun productAlreadyExistsInTheShoppingList(productName: String, productBrand: String, shoppingListId: Long) : Boolean {
         dataSource.getProductsByShoppingListIdNonLive(shoppingListId).forEach {
-            if (it.name.equals(productName, true))
+            if (it.name.equals(productName, true) && it.brand.equals(productBrand, true))
+                return true
+        }
+        return false
+    }
+
+    fun productWithSameNameAlreadyExists(productName: String, productBrand: String) : Boolean {
+        dataSource.getAllProductsNonLive().forEach {
+            if (it.name.equals(productName, true) && it.brand.equals(productBrand, true))
                 return true
         }
         return false
@@ -49,6 +56,18 @@ class ProductsViewModel(val dataSource: ProductDao) : ViewModel() {
 
     fun getProductsByShoppingListIdNonLive(shoppingListId: Long) : List<Product> {
         return dataSource.getProductsByShoppingListIdNonLive(shoppingListId)
+    }
+
+    fun getProductsOnCart() : LiveData<List<Product>> {
+        return dataSource.getProductsOnCart()
+    }
+
+    fun updateProduct(product: Product) {
+        dataSource.updateProduct(product)
+    }
+
+    fun isEmpty() : LiveData<Boolean> {
+        return dataSource.isCartEmpty()
     }
 }
 

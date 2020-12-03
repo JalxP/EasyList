@@ -73,8 +73,6 @@ i
 9app/src/main/res/layout/fragment_add_measurement_unit.xml,4/0/40e708072ac721d3449a65a5e03450bbda10bcd8
 {
 Kapp/src/main/java/me/jalxp/easylist/adapters/MeasurementUnitsListAdapter.kt,f/e/fe2e640c3d9ddddbcf68165ec4a7dbf1e79041d8
-[
-+app/src/main/res/layout/nav_header_main.xml,c/2/c2e5d0b244b7ce4916b4bef4396275c61eb4e7e1
 Z
 *app/src/main/res/drawable/side_nav_bar.xml,8/b/8bced72a6668a3dd684c3e47f0553968df06271a
 …

@@ -8,46 +8,48 @@
     <fragment
         android:id="@+id/nav_shoppinglists"
         android:name="me.jalxp.easylist.ui.shoppingList.ShoppingListsFragment"
-        android:label="@string/menu_shoppinglists"
         tools:layout="@layout/fragment_shopping_lists" >
         <action
             android:id="@+id/action_nav_shoppinglists_to_addShoppingListFragment"
-            app:destination="@id/addShoppingListFragment" />
+            app:destination="@id/nav_addShoppingListFragment" />
         <action
             android:id="@+id/action_nav_shoppinglists_to_singleListFragment"
-            app:destination="@id/singleListFragment" />
+            app:destination="@id/nav_singleListFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_categories"
         android:name="me.jalxp.easylist.ui.categories.CategoriesFragment"
-        android:label="@string/menu_categories"
         tools:layout="@layout/fragment_categories" >
         <action
             android:id="@+id/action_nav_categories_to_addCategoryFragment"
-            app:destination="@id/addCategoryFragment" />
+            app:destination="@id/nav_addCategoryFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_measurementUnits"
         android:name="me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsFragment"
-        android:label="@string/menu_measurementUnits"
         tools:layout="@layout/fragment_measurement_units" >
         <action
             android:id="@+id/action_nav_measurementUnits_to_addMeasurementUnitFragment"
-            app:destination="@id/addMeasurementUnitFragment" />
+            app:destination="@id/nav_addMeasurementUnitFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_products"
         android:name="me.jalxp.easylist.ui.products.ProductsFragment"
-        android:label="@string/menu_products"
-        tools:layout="@layout/fragment_products"/>
+        tools:layout="@layout/fragment_products">
+        <action
+            android:id="@+id/action_nav_products_to_addProductFragment"
+            app:destination="@id/nav_addProductFragment" />
+        <action
+            android:id="@+id/action_nav_products_to_productDetailFragment"
+            app:destination="@id/nav_productDetailFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/addMeasurementUnitFragment"
+        android:id="@+id/nav_addMeasurementUnitFragment"
         android:name="me.jalxp.easylist.ui.measurementUnits.AddMeasurementUnitFragment"
-        android:label="@string/fragment_add_measurementUnits"
         tools:layout="@layout/fragment_add_measurement_unit" >
         <action
             android:id="@+id/action_addMeasurementUnitFragment_to_nav_measurementUnits"
@@ -55,9 +57,8 @@
     </fragment>
 
     <fragment
-        android:id="@+id/addShoppingListFragment"
+        android:id="@+id/nav_addShoppingListFragment"
         android:name="me.jalxp.easylist.ui.shoppingList.AddShoppingListFragment"
-        android:label="@string/fragment_add_shoppingList"
         tools:layout="@layout/fragment_add_shopping_list" >
         <action
             android:id="@+id/action_addShoppingListFragment_to_nav_shoppinglists"
@@ -65,9 +66,8 @@
     </fragment>
 
     <fragment
-        android:id="@+id/addCategoryFragment"
+        android:id="@+id/nav_addCategoryFragment"
         android:name="me.jalxp.easylist.ui.categories.AddCategoryFragment"
-        android:label="@string/fragment_add_category"
         tools:layout="@layout/fragment_add_category" >
         <action
             android:id="@+id/action_addCategoryFragment_to_nav_categories"
@@ -75,33 +75,34 @@
     </fragment>
 
     <fragment
-        android:id="@+id/singleListFragment"
+        android:id="@+id/nav_singleListFragment"
         android:name="me.jalxp.easylist.ui.shoppingList.SingleListFragment"
         tools:layout="@layout/fragment_single_list" >
         <action
             android:id="@+id/action_singleListFragment_to_addProductFragment"
-            app:destination="@id/addProductFragment" />
+            app:destination="@id/nav_addProductFragment" />
         <action
             android:id="@+id/action_singleListFragment_to_productDetailFragment"
-            app:destination="@id/productDetailFragment" />
+            app:destination="@id/nav_productDetailFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/addProductFragment"
+        android:id="@+id/nav_addProductFragment"
         android:name="me.jalxp.easylist.ui.products.AddProductFragment"
-        android:label="@string/fragment_add_product"
         tools:layout="@layout/fragment_add_product" >
         <action
             android:id="@+id/action_addProductFragment_to_singleListFragment"
-            app:destination="@id/singleListFragment"
-            app:popUpTo="@id/singleListFragment"
+            app:destination="@id/nav_singleListFragment"
+            app:popUpTo="@id/nav_singleListFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_addProductFragment_to_nav_products"
+            app:destination="@id/nav_products" />
     </fragment>
 
     <fragment
-        android:id="@+id/productDetailFragment"
+        android:id="@+id/nav_productDetailFragment"
         android:name="me.jalxp.easylist.ui.products.ProductDetailFragment"
-        android:label="fragment_product_detail"
         tools:layout="@layout/fragment_product_detail" />
 
 </navigation>

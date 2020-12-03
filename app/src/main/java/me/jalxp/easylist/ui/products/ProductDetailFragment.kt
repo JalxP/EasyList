@@ -24,8 +24,6 @@ class ProductDetailFragment : Fragment() {
 
 
 
-
-
         return binding.root
     }
 

@@ -1,13 +1,12 @@
 package me.jalxp.easylist.adapters
 
-import android.util.Log
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import me.jalxp.easylist.ImageUtility
 import me.jalxp.easylist.data.entities.Product
 import me.jalxp.easylist.databinding.ProductItemBinding
 import me.jalxp.easylist.ui.categories.CategoriesViewModel
@@ -16,7 +15,8 @@ import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModel
 class ProductsListAdapter(
     private val categoriesViewModel: CategoriesViewModel,
     private val measurementUnitsViewModel: MeasurementUnitsViewModel,
-    private val onItemClick: (Product) -> Unit
+    private val onItemClick: (Product) -> Unit,
+    private val onLongItemClick: (Product) -> Unit
 ) : ListAdapter<Product, ProductsListAdapter.ProductViewHolder>(ProductListDiffCallback) {
 
     private lateinit var binding: ProductItemBinding
@@ -25,7 +25,8 @@ class ProductsListAdapter(
         private val binding: ProductItemBinding,
         private val categoriesViewModel: CategoriesViewModel,
         private val measurementUnitsViewModel: MeasurementUnitsViewModel,
-        private val onItemClick: (Product) -> Unit
+        private val onItemClick: (Product) -> Unit,
+        private val onLongItemClick: (Product) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private var currentProduct: Product? = null
@@ -38,19 +39,18 @@ class ProductsListAdapter(
                     onItemClick(it)
                 }
             }
+            itemView.setOnLongClickListener {
+                currentProduct?.let {
+                    onLongItemClick(it)
+                }
+                return@setOnLongClickListener true
+            }
         }
 
         fun bind(product: Product) {
             currentProduct = product
+
             binding.productNameTextView.text = product.name
-            binding.productImageView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
-            width = binding.productImageView.measuredWidth
-            height = binding.productImageView.measuredHeight
-
-            Log.e("DEBUG", "w:$width, h:$height")
-            // TODO is the view inflated?
-            ImageUtility.setPic(binding.productImageView, product.imagePath, width, height)
-
             // Check if product has associated quantity and measurement units
             var quantityText = if (product.quantity != null) product.quantity.toString() else ""
             if (product.measureUnitId != null) {
@@ -59,7 +59,10 @@ class ProductsListAdapter(
                 quantityText += " " + measureUnit.designation
             }
             binding.productQuantityTextView.text = quantityText
-
+            if (product.onCart)
+                binding.productNameTextView.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#43A047"));
+            else
+                binding.productNameTextView.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFD149"));
         }
     }
 
@@ -69,7 +72,8 @@ class ProductsListAdapter(
             binding,
             categoriesViewModel,
             measurementUnitsViewModel,
-            onItemClick
+            onItemClick,
+            onLongItemClick
         )
     }
 
@@ -86,6 +90,6 @@ object ProductListDiffCallback : DiffUtil.ItemCallback<Product>() {
     }
 
     override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-        return oldItem.productId == newItem.productId
+        return oldItem.productId == newItem.productId && oldItem.onCart == newItem.onCart
     }
 }

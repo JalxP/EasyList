@@ -1,14 +1,15 @@
 package me.jalxp.easylist.ui.products
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import me.jalxp.easylist.R
 import me.jalxp.easylist.adapters.ProductsListAdapter
 import me.jalxp.easylist.data.entities.Product
@@ -54,15 +55,22 @@ class ProductsContainerFragment : Fragment() {
         /* RecycleView */
         val productsAdapter = ProductsListAdapter(
             categoriesViewModel,
-            measureUnitsViewModel
-        ) { product -> adapterOnItemClick(product) }
+            measureUnitsViewModel,
+            { product -> adapterOnItemClick(product) },
+            { product -> adapterOnItemLongClick(product) }
+        )
 
         with(binding) {
             recycleViewList.adapter = productsAdapter
             val gridColumnCount =
                 resources.getInteger(R.integer.grid_column_count)
             recycleViewList.layoutManager =
-                StaggeredGridLayoutManager(gridColumnCount, StaggeredGridLayoutManager.VERTICAL)
+                GridLayoutManager(
+                    context,
+                    gridColumnCount,
+                    GridLayoutManager.VERTICAL,
+                    false
+                )
         }
 
         when (requireArguments().getInt(VIEW_TYPE)) {
@@ -75,22 +83,12 @@ class ProductsContainerFragment : Fragment() {
                 shoppingListId = requireArguments().getLong(EXTRA_LIST_ID)
                 productsViewModel.getProductsByShoppingListId(shoppingListId!!)
                     .observe(viewLifecycleOwner, {
-                            productsAdapter.submitList(it)
+                        productsAdapter.submitList(it)
                     })
             }
             SHOW_PRODUCTS_BY_CATEGORY -> {
 
             }
-        }
-
-
-
-
-
-        /* Floating Button */
-        binding.addProductFab.setOnClickListener { view: View ->
-            view.findNavController()
-                .navigate(R.id.action_singleListFragment_to_addProductFragment, arguments)
         }
 
         return binding.root
@@ -99,12 +97,33 @@ class ProductsContainerFragment : Fragment() {
     private fun adapterOnItemClick(product: Product) {
 
         val bundle = Bundle()
-        bundle.putLong(EXTRA_LIST_ID, product.shoppingListId)
         bundle.putLong(EXTRA_PRODUCT_ID, product.productId)
 
-        findNavController().navigate(
-            R.id.action_singleListFragment_to_productDetailFragment,
-            bundle
-        )
+        // Because we have 2 origins with the same destination
+        var destination = R.id.action_nav_products_to_productDetailFragment
+        if (findNavController().currentDestination?.id == R.id.nav_singleListFragment) {
+            destination = R.id.action_singleListFragment_to_productDetailFragment
+        }
+
+        findNavController().navigate(destination, bundle)
+    }
+
+    private fun adapterOnItemLongClick(product: Product) {
+        if (findNavController().currentDestination?.id == R.id.nav_singleListFragment) {
+            if (!product.onCart) {
+                product.onCart = true
+                productsViewModel.updateProduct(product)
+                binding.recycleViewList.adapter?.notifyDataSetChanged()
+                // TODO wtf is going on here
+                val str =
+                    getString(R.string.prefix_item_added_to_cart) + product.name + getString(R.string.posfix_item_added_to_cart)
+                Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show()
+            } else {
+                val str = product.name + getString(R.string.posfix_item_already_on_cart)
+                Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show()
+            }
+        } else {
+            Log.e("<DEBUG>", "Do not add ${product.name} to shopping cart!")
+        }
     }
 }

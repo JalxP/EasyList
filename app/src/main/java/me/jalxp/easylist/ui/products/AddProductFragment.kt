@@ -57,7 +57,7 @@ class AddProductFragment : Fragment() {
     ): View? {
         binding = FragmentAddProductBinding.inflate(inflater, container, false)
 
-        shoppingListId = requireArguments().getLong(EXTRA_LIST_ID)
+        shoppingListId = arguments?.getLong(EXTRA_LIST_ID)
 
         /* Populate dropdown lists */
         categoriesViewModel.categoriesLiveData.observe(
@@ -198,14 +198,6 @@ class AddProductFragment : Fragment() {
         if (productName.isEmpty()) {
             binding.productNameTextLayout.error = getString(R.string.need_name_error)
             return
-        } else if (productsViewModel.productAlreadyExistsInTheShoppingList(
-                productName,
-                shoppingListId!!
-            )
-        ) {
-            binding.productNameTextLayout.error =
-                getString(R.string.product_already_exists_on_list)
-            return
         }
 
         val productDescription = binding.productDescriptionInput.text.toString()
@@ -213,24 +205,62 @@ class AddProductFragment : Fragment() {
         var productQuantity = 1
         if (productQuantityStr.isNotEmpty())
             productQuantity = productQuantityStr.toInt()
-
         val productMeasureUnit = binding.measurementUnitAutoComplete.text.toString()
         val productCategory = binding.categoryAutoComplete.text.toString()
-
         val productBrand = binding.productBrandInput.text.toString()
 
-        addNewProduct(
-            productName,
-            productDescription,
-            productQuantity,
-            productMeasureUnit,
-            productCategory,
-            productBrand
+        if (shoppingListId == null)
+            addProductToMainList(productName, productDescription, productQuantity, productMeasureUnit, productCategory, productBrand)
+        else
+            addProductToSpecificList(productName, productDescription, productQuantity, productMeasureUnit, productCategory, productBrand)
+
+    }
+
+
+    private fun addProductToMainList(
+        productName: String,
+        productDescription: String,
+        productQuantity: Int,
+        productMeasureUnit: String,
+        productCategory: String,
+        productBrand: String
+    ) {
+        if (productsViewModel.productWithSameNameAlreadyExists(productName, productBrand)) {
+            binding.productNameTextLayout.error = getString(R.string.product_with_the_same_name_already_exists)
+            binding.productBrandTextLayout.error = " "
+            return
+        }
+
+        addNewProduct(productName, productDescription, productQuantity, productMeasureUnit, productCategory, productBrand)
+
+        findNavController().navigate(
+            R.id.action_addProductFragment_to_nav_products
         )
+    }
+
+    private fun addProductToSpecificList(
+        productName: String,
+        productDescription: String,
+        productQuantity: Int,
+        productMeasureUnit: String,
+        productCategory: String,
+        productBrand: String
+    ) {
+        if (productsViewModel.productAlreadyExistsInTheShoppingList(productName, productBrand, shoppingListId!!))
+        {
+            binding.productNameTextLayout.error = getString(R.string.product_already_exists_on_list)
+            binding.productBrandTextLayout.error = " "
+            return
+        }
+
+        addNewProduct(productName, productDescription, productQuantity, productMeasureUnit, productCategory, productBrand)
+
         findNavController().navigate(
             R.id.action_addProductFragment_to_singleListFragment,
             arguments
         )
+
+
     }
 
     private fun addNewProduct(
@@ -258,7 +288,7 @@ class AddProductFragment : Fragment() {
             productQuantity,
             productMeasureUnitId,
             productCategoryId,
-            shoppingListId!!,
+            shoppingListId,
             productBrand,
             null, // TODO
             filePath

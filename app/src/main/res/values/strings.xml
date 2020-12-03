@@ -12,7 +12,6 @@
     <string name="menu_categories">Categories</string>
     <string name="menu_measurementUnits">Measurement Units</string>
     <string name="menu_products">Products</string>
-
     <string name="fragment_add_measurementUnits">Add Measurement Unit</string>
     <string name="fragment_add_shoppingList">Add Shopping List</string>
     <string name="fragment_add_category">Add Category</string>
@@ -56,12 +55,19 @@
 
     <!-- Input Error Messages -->
     <string name="need_name_error">Name is required.</string>
-    <string name="product_already_exists_on_list">This product already exists on this list.</string>
+    <string name="product_already_exists_on_list">A product with this name and brand already exists in this list.</string>
+    <string name="product_with_the_same_name_already_exists">There\'s already a product with the same name and brand.</string>
     <string name="shopping_list_already_exists">This name is already being used by another shopping list.</string>
     <string name="need_description_error">Description is required.</string>
     <string name="need_designation_error">Designation is required.</string>
     <string name="measurement_already_exists_error">Measurement unit already exists.</string>
     <string name="category_already_exists_error">Category already exists.</string>
+
+    <!-- Snackbar Messages -->
+    <string name="prefix_item_added_to_cart">Added\ </string>
+    <string name="posfix_item_added_to_cart">\ to shopping cart.</string>
+    <string name="posfix_item_already_on_cart">\ is already on the shopping cart.</string>
+    <string name="snackbar_dismiss">Dismiss</string>
 
     <string-array name="sort_by_array">
         <item>@string/all_sort</item>
@@ -72,5 +78,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="copy_from_hint">Copy From</string>
     <string name="default_none_value">None</string>
+    <string name="basket">Basket</string>
+    <string name="max_value_cart">99+</string>
 
 </resources>

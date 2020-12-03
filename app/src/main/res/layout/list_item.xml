@@ -40,16 +40,19 @@
                 android:id="@+id/editImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/amber"
                 android:contentDescription="@string/edit_image_button"
-                app:srcCompat="@drawable/twotone_create_24" />
+                android:tint="@color/white"
+                app:srcCompat="@drawable/twotone_create_black_36" />
 
             <ImageButton
                 android:id="@+id/deleteImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/amber"
                 android:contentDescription="@string/delete_image_button"
-                android:tint="#B71C1C"
-                app:srcCompat="@drawable/twotone_delete_24" />
+                android:tint="@color/white"
+                app:srcCompat="@drawable/twotone_delete_black_36" />
 
         </LinearLayout>
     </LinearLayout>
