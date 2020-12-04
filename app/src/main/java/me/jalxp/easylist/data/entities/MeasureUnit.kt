@@ -26,6 +26,4 @@ data class MeasureUnit(
     override fun hashCode(): Int {
         return designation.hashCode()
     }
-
-
 }

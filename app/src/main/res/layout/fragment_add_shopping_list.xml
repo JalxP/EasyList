@@ -10,19 +10,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
         android:layout_marginEnd="@dimen/margin"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/textView"
-            style="@style/big_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/create_shopping_list"
-            android:textAlignment="center" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/shopping_list_input_layout"

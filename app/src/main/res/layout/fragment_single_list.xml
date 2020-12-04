@@ -8,6 +8,23 @@
     android:longClickable="false"
     tools:context=".ui.shoppingList.SingleListFragment">
 
+    <TextView
+        android:id="@+id/cart_instruction_TextView"
+        style="@style/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:text="@string/cart_instructions"
+        android:textColor="@color/green_ok"
+        android:textStyle="italic"
+        app:autoSizeMaxTextSize="24sp"
+        app:autoSizeMinTextSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -15,9 +32,10 @@
         android:orientation="horizontal"
         android:paddingStart="@dimen/padding_small"
         android:paddingEnd="@dimen/padding_small"
+        app:layout_constraintBottom_toTopOf="@id/products_frame"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/cart_instruction_TextView">
 
         <TextView
             style="@style/title"

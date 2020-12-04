@@ -4,21 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import me.jalxp.easylist.data.entities.Category
-import me.jalxp.easylist.data.entities.MeasureUnit
-import me.jalxp.easylist.data.entities.Product
-import me.jalxp.easylist.data.entities.ShoppingList
-import me.jalxp.easylist.data.daos.CategoryDao
-import me.jalxp.easylist.data.daos.MeasureUnitDao
-import me.jalxp.easylist.data.daos.ProductDao
-import me.jalxp.easylist.data.daos.ShoppingListDao
+import me.jalxp.easylist.data.daos.*
+import me.jalxp.easylist.data.entities.*
 
 @Database(
     entities = [
         ShoppingList::class,
         Product::class,
         Category::class,
-        MeasureUnit::class
+        MeasureUnit::class,
+        Price::class
     ], version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -27,6 +22,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun productsDao(): ProductDao
     abstract fun categoriesDao(): CategoryDao
     abstract fun measureUnitsDao(): MeasureUnitDao
+    abstract fun priceDao(): PriceDao
 
     companion object {
         @Volatile

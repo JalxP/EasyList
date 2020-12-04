@@ -19,6 +19,7 @@ import me.jalxp.easylist.data.entities.ShoppingList
 const val EXTRA_LIST_ID = "extra list id"
 const val EXTRA_LIST_TITLE = "extra list name"
 const val EXTRA_PRODUCT_ID = "extra product id"
+const val EXTRA_PRODUCT_NAME = "extra product name"
 
 class ShoppingListsFragment : Fragment() {
 

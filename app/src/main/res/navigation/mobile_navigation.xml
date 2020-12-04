@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/nav_shoppinglists"
         android:name="me.jalxp.easylist.ui.shoppingList.ShoppingListsFragment"
-        tools:layout="@layout/fragment_shopping_lists" >
+        tools:layout="@layout/fragment_shopping_lists">
         <action
             android:id="@+id/action_nav_shoppinglists_to_addShoppingListFragment"
             app:destination="@id/nav_addShoppingListFragment" />
@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/nav_categories"
         android:name="me.jalxp.easylist.ui.categories.CategoriesFragment"
-        tools:layout="@layout/fragment_categories" >
+        tools:layout="@layout/fragment_categories">
         <action
             android:id="@+id/action_nav_categories_to_addCategoryFragment"
             app:destination="@id/nav_addCategoryFragment" />
@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/nav_measurementUnits"
         android:name="me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsFragment"
-        tools:layout="@layout/fragment_measurement_units" >
+        tools:layout="@layout/fragment_measurement_units">
         <action
             android:id="@+id/action_nav_measurementUnits_to_addMeasurementUnitFragment"
             app:destination="@id/nav_addMeasurementUnitFragment" />
@@ -50,7 +50,7 @@
     <fragment
         android:id="@+id/nav_addMeasurementUnitFragment"
         android:name="me.jalxp.easylist.ui.measurementUnits.AddMeasurementUnitFragment"
-        tools:layout="@layout/fragment_add_measurement_unit" >
+        tools:layout="@layout/fragment_add_measurement_unit">
         <action
             android:id="@+id/action_addMeasurementUnitFragment_to_nav_measurementUnits"
             app:destination="@id/nav_measurementUnits" />
@@ -59,7 +59,7 @@
     <fragment
         android:id="@+id/nav_addShoppingListFragment"
         android:name="me.jalxp.easylist.ui.shoppingList.AddShoppingListFragment"
-        tools:layout="@layout/fragment_add_shopping_list" >
+        tools:layout="@layout/fragment_add_shopping_list">
         <action
             android:id="@+id/action_addShoppingListFragment_to_nav_shoppinglists"
             app:destination="@id/nav_shoppinglists" />
@@ -68,7 +68,7 @@
     <fragment
         android:id="@+id/nav_addCategoryFragment"
         android:name="me.jalxp.easylist.ui.categories.AddCategoryFragment"
-        tools:layout="@layout/fragment_add_category" >
+        tools:layout="@layout/fragment_add_category">
         <action
             android:id="@+id/action_addCategoryFragment_to_nav_categories"
             app:destination="@id/nav_categories" />
@@ -77,7 +77,7 @@
     <fragment
         android:id="@+id/nav_singleListFragment"
         android:name="me.jalxp.easylist.ui.shoppingList.SingleListFragment"
-        tools:layout="@layout/fragment_single_list" >
+        tools:layout="@layout/fragment_single_list">
         <action
             android:id="@+id/action_singleListFragment_to_addProductFragment"
             app:destination="@id/nav_addProductFragment" />
@@ -89,7 +89,7 @@
     <fragment
         android:id="@+id/nav_addProductFragment"
         android:name="me.jalxp.easylist.ui.products.AddProductFragment"
-        tools:layout="@layout/fragment_add_product" >
+        tools:layout="@layout/fragment_add_product">
         <action
             android:id="@+id/action_addProductFragment_to_singleListFragment"
             app:destination="@id/nav_singleListFragment"
@@ -104,5 +104,14 @@
         android:id="@+id/nav_productDetailFragment"
         android:name="me.jalxp.easylist.ui.products.ProductDetailFragment"
         tools:layout="@layout/fragment_product_detail" />
+
+    <fragment
+        android:id="@+id/nav_basketFragment"
+        android:name="me.jalxp.easylist.ui.products.BasketFragment"
+        tools:layout="@layout/fragment_basket" >
+        <action
+            android:id="@+id/action_nav_basketFragment_to_nav_productDetailFragment"
+            app:destination="@id/nav_productDetailFragment" />
+    </fragment>
 
 </navigation>

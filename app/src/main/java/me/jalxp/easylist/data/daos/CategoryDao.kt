@@ -14,10 +14,10 @@ interface CategoryDao {
     fun getAllCategories(): LiveData<List<Category>>
 
     @Query("SELECT * FROM category WHERE categoryId == :categoryId")
-    fun getCategoryById(categoryId: Long) : LiveData<Category>
+    fun getCategoryById(categoryId: Long) : Category
 
     @Query("SELECT * FROM category WHERE designation == :categoryDesignation")
-    fun getCategoryByDesignation(categoryDesignation: String) : LiveData<Category>
+    fun getCategoryByDesignation(categoryDesignation: String) : Category
 
     @Insert
     fun insertCategory(category: Category)

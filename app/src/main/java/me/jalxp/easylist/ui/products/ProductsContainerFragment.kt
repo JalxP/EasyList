@@ -21,11 +21,13 @@ import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModelFactory
 
 import me.jalxp.easylist.ui.shoppingList.EXTRA_LIST_ID
 import me.jalxp.easylist.ui.shoppingList.EXTRA_PRODUCT_ID
+import me.jalxp.easylist.ui.shoppingList.EXTRA_PRODUCT_NAME
 
 const val VIEW_TYPE = "view type"
 const val SHOW_PRODUCTS_ALL = 1
 const val SHOW_PRODUCTS_BY_LIST = 2
 const val SHOW_PRODUCTS_BY_CATEGORY = 3
+const val SHOW_PRODUCTS_ON_CART = 4
 
 class ProductsContainerFragment : Fragment() {
 
@@ -89,41 +91,56 @@ class ProductsContainerFragment : Fragment() {
             SHOW_PRODUCTS_BY_CATEGORY -> {
 
             }
+            SHOW_PRODUCTS_ON_CART -> {
+                productsViewModel.getProductsOnCart().observe(viewLifecycleOwner, {
+                    productsAdapter.submitList(it)
+                })
+            }
         }
 
         return binding.root
     }
 
     private fun adapterOnItemClick(product: Product) {
-
-        val bundle = Bundle()
-        bundle.putLong(EXTRA_PRODUCT_ID, product.productId)
-
-        // Because we have 2 origins with the same destination
-        var destination = R.id.action_nav_products_to_productDetailFragment
-        if (findNavController().currentDestination?.id == R.id.nav_singleListFragment) {
-            destination = R.id.action_singleListFragment_to_productDetailFragment
+        val bundle = Bundle().apply {
+            putLong(EXTRA_PRODUCT_ID, product.productId)
+            putString(EXTRA_PRODUCT_NAME, product.name)
         }
 
-        findNavController().navigate(destination, bundle)
+        // Because we have more origins with the same destination
+        when (findNavController().currentDestination?.id) {
+            R.id.nav_singleListFragment -> {
+                findNavController().navigate(R.id.action_singleListFragment_to_productDetailFragment, bundle)
+            }
+            R.id.nav_products -> {
+                findNavController().navigate(R.id.action_nav_products_to_productDetailFragment, bundle)
+            }
+            R.id.nav_basketFragment -> {
+                findNavController().navigate(R.id.action_nav_basketFragment_to_nav_productDetailFragment, bundle)
+            }
+        }
     }
 
     private fun adapterOnItemLongClick(product: Product) {
-        if (findNavController().currentDestination?.id == R.id.nav_singleListFragment) {
-            if (!product.onCart) {
-                product.onCart = true
-                productsViewModel.updateProduct(product)
-                binding.recycleViewList.adapter?.notifyDataSetChanged()
-                // TODO wtf is going on here
-                val str =
-                    getString(R.string.prefix_item_added_to_cart) + product.name + getString(R.string.posfix_item_added_to_cart)
-                Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show()
-            } else {
-                val str = product.name + getString(R.string.posfix_item_already_on_cart)
-                Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show()
+
+        when (findNavController().currentDestination?.id) {
+            R.id.nav_singleListFragment -> {
+                if (!product.onCart) {
+                    product.onCart = true
+                    productsViewModel.updateProduct(product)
+                    binding.recycleViewList.adapter?.notifyDataSetChanged()
+                    // TODO wtf is going on here
+                    val str =
+                        getString(R.string.prefix_item_added_to_cart) + product.name + getString(R.string.posfix_item_added_to_cart)
+                    Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show()
+                } else {
+                    val str = product.name + getString(R.string.posfix_item_already_on_cart)
+                    Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show()
+                }
             }
-        } else {
-            Log.e("<DEBUG>", "Do not add ${product.name} to shopping cart!")
+            else -> {
+                Log.e("<DEBUG>", "Do not add ${product.name} to shopping cart!")
+            }
         }
     }
 }

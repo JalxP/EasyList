@@ -13,13 +13,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:tint="@color/white"
+        app:tint="@color/white"
         app:srcCompat="@drawable/twotone_shopping_basket_black_36" />
 
     <FrameLayout
         android:id="@+id/view_alert_red_circle"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:layout_gravity="top|end"
         android:background="@android:drawable/presence_invisible"
         android:backgroundTint="@color/amber"
@@ -31,11 +31,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingStart="@dimen/padding_tiny"
-            android:paddingEnd="@dimen/padding_tiny"
             android:textColor="@color/white"
             android:textSize="14sp"
-            tools:text="3" />
+            tools:text="10" />
 
     </FrameLayout>
 

@@ -14,6 +14,7 @@ class ImageUtility {
         fun setPic(view: View, path: String?) {
             if (path.isNullOrEmpty())
                 return
+            Log.e("<SetPic>", "width: ${view.width}, height:${view.height}")
             val targetW = view.width
             val targetH = view.height
             if (targetH < 1 || targetW < 1) {

@@ -8,7 +8,7 @@
         android:title="@string/action_settings"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_basket"
+        android:id="@+id/nav_basketFragment"
         android:actionLayout="@layout/menu_item_shopping_basket"
         android:title="@string/basket"
         app:showAsAction="ifRoom" />

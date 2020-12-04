@@ -50,6 +50,10 @@ class ProductsViewModel(val dataSource: ProductDao) : ViewModel() {
         return dataSource.getAllProducts()
     }
 
+    fun getProductById(productId: Long) : Product {
+        return dataSource.getProductById(productId)
+    }
+
     fun getProductsByShoppingListId(shoppingListId: Long) : LiveData<List<Product>> {
         return dataSource.getProductsByShoppingListId(shoppingListId)
     }
@@ -64,10 +68,6 @@ class ProductsViewModel(val dataSource: ProductDao) : ViewModel() {
 
     fun updateProduct(product: Product) {
         dataSource.updateProduct(product)
-    }
-
-    fun isEmpty() : LiveData<Boolean> {
-        return dataSource.isCartEmpty()
     }
 }
 

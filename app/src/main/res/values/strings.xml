@@ -16,6 +16,7 @@
     <string name="fragment_add_shoppingList">Add Shopping List</string>
     <string name="fragment_add_category">Add Category</string>
     <string name="fragment_add_product">Add Product</string>
+    <string name="fragment_basket">Shopping Cart</string>
 
     <string name="edit_image_button">Edit Image Button</string>
     <string name="delete_image_button">Delete Image Button</string>
@@ -38,6 +39,9 @@
     <string name="product_name_hint">Name</string>
     <string name="product_description_hint">Description</string>
     <string name="product_brand_hint">Brand</string>
+    <string name="product_price_history">Price History</string>
+    <string name="product_lowest_price">Lowest Price</string>
+    <string name="product_highest_price">Highest Price</string>
     <string name="add_button">Add</string>
     <string name="activity_add_product">Add Product</string>
     <string name="create_category_button">Create category button</string>
@@ -79,6 +83,7 @@
     <string name="copy_from_hint">Copy From</string>
     <string name="default_none_value">None</string>
     <string name="basket">Basket</string>
-    <string name="max_value_cart">99+</string>
+    <string name="max_value_cart">++</string>
+    <string name="cart_instructions">To add a product to your cart long press it.</string>
 
 </resources>

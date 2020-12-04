@@ -3,8 +3,13 @@ package me.jalxp.easylist.ui.products
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.os.StrictMode
 import android.provider.MediaStore
+import android.text.format.DateUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +31,10 @@ import me.jalxp.easylist.ui.categories.CategoriesViewModelFactory
 import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModel
 import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModelFactory
 import me.jalxp.easylist.ui.shoppingList.EXTRA_LIST_ID
+import java.io.File
+import java.lang.reflect.Method
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 const val GALLERY_REQUEST_CODE = 10
@@ -86,6 +95,9 @@ class AddProductFragment : Fragment() {
         binding.importImageButton.setOnClickListener {
             selectImageFromGallery()
         }
+        binding.captureImageButton.setOnClickListener {
+            captureImage()
+        }
 
         /* Float Action Button */
         binding.addProductButton.setOnClickListener {
@@ -116,7 +128,10 @@ class AddProductFragment : Fragment() {
             }
             CAMERA_REQUEST_CODE -> {
                 if (resultCode == Activity.RESULT_OK) {
-                    // TODO
+                    ImageUtility.setPic(
+                        binding.productImageView,
+                        filePath
+                    )
                 }
             }
             else -> {
@@ -136,14 +151,13 @@ class AddProductFragment : Fragment() {
                 if ((grantResults.isNotEmpty() &&
                             grantResults[0] == PackageManager.PERMISSION_GRANTED)
                 ) {
-                    // TODO
+                    captureImage()
                 } else {
                     Toast.makeText(
                         requireContext(),
                         "The camera feature is unavailable.",
                         Toast.LENGTH_LONG
-                    )
-                        .show()
+                    ).show()
                 }
                 return
             }
@@ -157,8 +171,7 @@ class AddProductFragment : Fragment() {
                         requireContext(),
                         "The media selection feature is unavailable.",
                         Toast.LENGTH_LONG
-                    )
-                        .show()
+                    ).show()
                 }
                 return
 
@@ -193,6 +206,71 @@ class AddProductFragment : Fragment() {
         }
     }
 
+    private fun captureImage() {
+
+        if (Build.VERSION.SDK_INT >= 24) {
+            try {
+                val m: Method = StrictMode::class.java.getMethod("disableDeathOnFileUriExposure")
+                m.invoke(null)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED ||
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED ||
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(), arrayOf(
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    android.Manifest.permission.CAMERA
+                ), CAMERA_PERMISSIONS_REQUEST_CODE
+            )
+        } else {
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
+                val fileUri = Uri.fromFile(getOutputMediaFile())
+                putExtra(MediaStore.EXTRA_OUTPUT, fileUri)
+            }
+
+            startActivityForResult(intent, CAMERA_REQUEST_CODE)
+        }
+    }
+
+    private fun getOutputMediaFile(): File? {
+        if (Environment.getExternalStorageState() != Environment.MEDIA_MOUNTED) {
+            return null
+        }
+
+        val mediaStorageDir = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+            "EasyList"
+        )
+        mediaStorageDir.apply {
+            if (!exists()) {
+                if (!mkdirs()) {
+                    return null
+                }
+            }
+        }
+
+        // Create a media file name
+        filePath = "${mediaStorageDir.path}${File.separator}${
+            SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        }.jpg"
+        return File(filePath)
+    }
+
     private fun addProductClicked() {
         val productName = binding.productNameInput.text.toString()
         if (productName.isEmpty()) {
@@ -201,7 +279,7 @@ class AddProductFragment : Fragment() {
         }
 
         val productDescription = binding.productDescriptionInput.text.toString()
-        val productQuantityStr = binding.productQuantityInput.text.toString()
+        val productQuantityStr = binding.quantityTextInputEditText.text.toString()
         var productQuantity = 1
         if (productQuantityStr.isNotEmpty())
             productQuantity = productQuantityStr.toInt()
@@ -210,9 +288,23 @@ class AddProductFragment : Fragment() {
         val productBrand = binding.productBrandInput.text.toString()
 
         if (shoppingListId == null)
-            addProductToMainList(productName, productDescription, productQuantity, productMeasureUnit, productCategory, productBrand)
+            addProductToMainList(
+                productName,
+                productDescription,
+                productQuantity,
+                productMeasureUnit,
+                productCategory,
+                productBrand
+            )
         else
-            addProductToSpecificList(productName, productDescription, productQuantity, productMeasureUnit, productCategory, productBrand)
+            addProductToSpecificList(
+                productName,
+                productDescription,
+                productQuantity,
+                productMeasureUnit,
+                productCategory,
+                productBrand
+            )
 
     }
 
@@ -226,12 +318,20 @@ class AddProductFragment : Fragment() {
         productBrand: String
     ) {
         if (productsViewModel.productWithSameNameAlreadyExists(productName, productBrand)) {
-            binding.productNameTextLayout.error = getString(R.string.product_with_the_same_name_already_exists)
+            binding.productNameTextLayout.error =
+                getString(R.string.product_with_the_same_name_already_exists)
             binding.productBrandTextLayout.error = " "
             return
         }
 
-        addNewProduct(productName, productDescription, productQuantity, productMeasureUnit, productCategory, productBrand)
+        addNewProduct(
+            productName,
+            productDescription,
+            productQuantity,
+            productMeasureUnit,
+            productCategory,
+            productBrand
+        )
 
         findNavController().navigate(
             R.id.action_addProductFragment_to_nav_products
@@ -246,14 +346,25 @@ class AddProductFragment : Fragment() {
         productCategory: String,
         productBrand: String
     ) {
-        if (productsViewModel.productAlreadyExistsInTheShoppingList(productName, productBrand, shoppingListId!!))
-        {
+        if (productsViewModel.productAlreadyExistsInTheShoppingList(
+                productName,
+                productBrand,
+                shoppingListId!!
+            )
+        ) {
             binding.productNameTextLayout.error = getString(R.string.product_already_exists_on_list)
             binding.productBrandTextLayout.error = " "
             return
         }
 
-        addNewProduct(productName, productDescription, productQuantity, productMeasureUnit, productCategory, productBrand)
+        addNewProduct(
+            productName,
+            productDescription,
+            productQuantity,
+            productMeasureUnit,
+            productCategory,
+            productBrand
+        )
 
         findNavController().navigate(
             R.id.action_addProductFragment_to_singleListFragment,
@@ -280,7 +391,7 @@ class AddProductFragment : Fragment() {
         var productCategoryId: Long? = null
         if (productCategory.isNotEmpty())
             productCategoryId =
-                categoriesViewModel.getCategoryByDesignation(productCategory).value?.categoryId
+                categoriesViewModel.getCategoryByDesignation(productCategory)?.categoryId
 
         productsViewModel.insertNewProduct(
             productName,

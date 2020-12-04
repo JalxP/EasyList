@@ -22,8 +22,12 @@ class CategoriesViewModel(val dataSource: CategoryDao) : ViewModel() {
         }
     }
 
-    fun getCategoryByDesignation(categoryDesignation: String) : LiveData<Category> {
+    fun getCategoryByDesignation(categoryDesignation: String) : Category {
         return dataSource.getCategoryByDesignation(categoryDesignation)
+    }
+
+    fun getCategoryById(categoryId: Long) : Category {
+        return dataSource.getCategoryById(categoryId)
     }
 
     fun deleteCategory(category: Category) {
