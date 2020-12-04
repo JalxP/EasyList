@@ -107,7 +107,7 @@
 
     <fragment
         android:id="@+id/nav_basketFragment"
-        android:name="me.jalxp.easylist.ui.products.BasketFragment"
+        android:name="me.jalxp.easylist.ui.basket.BasketFragment"
         tools:layout="@layout/fragment_basket" >
         <action
             android:id="@+id/action_nav_basketFragment_to_nav_productDetailFragment"

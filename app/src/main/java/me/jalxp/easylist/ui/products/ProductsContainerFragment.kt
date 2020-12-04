@@ -129,7 +129,6 @@ class ProductsContainerFragment : Fragment() {
                     product.onCart = true
                     productsViewModel.updateProduct(product)
                     binding.recycleViewList.adapter?.notifyDataSetChanged()
-                    // TODO wtf is going on here
                     val str =
                         getString(R.string.prefix_item_added_to_cart) + product.name + getString(R.string.posfix_item_added_to_cart)
                     Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show()

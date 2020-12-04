@@ -25,6 +25,9 @@ interface ProductDao {
     @Query("SELECT * FROM product WHERE onCart == 1")
     fun getProductsOnCart(): LiveData<List<Product>>
 
+    @Query("SELECT * FROM product WHERE onCart == 1")
+    fun getProductsOnCartNonLive(): List<Product>
+
     @Query("SELECT EXISTS (SELECT * FROM product WHERE onCart == 1)")
     fun isCartEmpty() : LiveData<Boolean>
 

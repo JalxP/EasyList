@@ -66,6 +66,10 @@ class ProductsViewModel(val dataSource: ProductDao) : ViewModel() {
         return dataSource.getProductsOnCart()
     }
 
+    fun getProductsOnCartNonLive() : List<Product> {
+        return dataSource.getProductsOnCartNonLive()
+    }
+
     fun updateProduct(product: Product) {
         dataSource.updateProduct(product)
     }

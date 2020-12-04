@@ -73,6 +73,12 @@
     <string name="posfix_item_already_on_cart">\ is already on the shopping cart.</string>
     <string name="snackbar_dismiss">Dismiss</string>
 
+    <!-- Dialogue Message -->
+    <string name="clear_basket_question">Are you sure?</string>
+    <string name="clear_basket_message">By confirming all the products in your basket will be cleared.</string>
+    <string name="clear_basket_cancel">Cancel</string>
+    <string name="clear_basket_confirm">Clear Basket</string>
+
     <string-array name="sort_by_array">
         <item>@string/all_sort</item>
         <item>@string/category_sort</item>
@@ -85,5 +91,6 @@
     <string name="basket">Basket</string>
     <string name="max_value_cart">++</string>
     <string name="cart_instructions">To add a product to your cart long press it.</string>
+    <string name="products_in_your_shopping_cart">Products in your shopping cart:</string>
 
 </resources>
