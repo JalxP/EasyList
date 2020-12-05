@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import com.google.android.material.snackbar.Snackbar
 import me.jalxp.easylist.adapters.ExpandableCategoriesAdapter
 import me.jalxp.easylist.data.entities.Category
 import me.jalxp.easylist.data.entities.Product
@@ -87,19 +88,23 @@ class CategorySortFragment : Fragment() {
         val adapter = ExpandableCategoriesAdapter(
             requireContext(),
             categoriesList,
-            productsByCategory
+            productsByCategory,
+            { product -> adapterOnItemClick(product) },
+            { product -> adapterOnItemLongClick(product) }
         )
 
-        binding.expandableListView.setAdapter(adapter)
-        binding.expandableListView.setOnGroupExpandListener { groupPosition ->
-            Toast.makeText(
-                requireContext(),
-                "${categoriesList[groupPosition]} List Expanded.",
-                Toast.LENGTH_LONG
-            ).show()
+        with (binding) {
+            expandableListView.setAdapter(adapter)
         }
 
-
         return binding.root
+    }
+
+    private fun adapterOnItemClick(product: Product) {
+        Log.e("<CLICK>", product.name)
+    }
+
+    private fun adapterOnItemLongClick(product: Product) {
+        Log.e("<LONG CLICK>", product.name)
     }
 }

@@ -14,7 +14,9 @@ import me.jalxp.easylist.databinding.ProductItemBinding
 class ExpandableCategoriesAdapter(
     private val context: Context,
     private val headers: List<Category>,
-    private val details: MutableMap<Category, MutableList<Product>>
+    private val details: MutableMap<Category, MutableList<Product>>,
+    private val onItemClick: (Product) -> Unit,
+    private val onLongItemClick: (Product) -> Unit
 ) : BaseExpandableListAdapter() {
 
     private lateinit var childBinding: ProductItemBinding
@@ -82,6 +84,16 @@ class ExpandableCategoriesAdapter(
         val product = getChild(groupPosition, childPosition) as Product
         childBinding.productNameTextView.text = product.name
         childBinding.productQuantityTextView.text = product.quantity.toString()
+
+        childBinding.root.setOnLongClickListener {
+            onLongItemClick(product)
+            true
+        }
+
+        childBinding.root.setOnClickListener {
+            onItemClick(product)
+            true
+        }
 
         return childBinding.root
     }
