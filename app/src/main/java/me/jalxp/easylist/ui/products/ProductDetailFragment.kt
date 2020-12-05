@@ -2,14 +2,12 @@ package me.jalxp.easylist.ui.products
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.text.InputType
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import com.google.android.material.snackbar.Snackbar
+import me.jalxp.easylist.R
 import me.jalxp.easylist.data.entities.Product
 import me.jalxp.easylist.databinding.FragmentProductDetailBinding
 import me.jalxp.easylist.ui.categories.CategoriesViewModel
@@ -17,6 +15,8 @@ import me.jalxp.easylist.ui.categories.CategoriesViewModelFactory
 import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModel
 import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModelFactory
 import me.jalxp.easylist.ui.shoppingList.EXTRA_PRODUCT_ID
+import me.jalxp.easylist.ui.shoppingList.ShoppingListViewModelFactory
+import me.jalxp.easylist.ui.shoppingList.ShoppingViewModel
 
 class ProductDetailFragment : Fragment() {
 
@@ -29,6 +29,9 @@ class ProductDetailFragment : Fragment() {
     }
     private val categoriesViewModel: CategoriesViewModel by activityViewModels {
         CategoriesViewModelFactory(requireContext())
+    }
+    private val shoppingViewModel: ShoppingViewModel by activityViewModels {
+        ShoppingListViewModelFactory(requireContext())
     }
 
     private lateinit var product: Product
@@ -56,6 +59,12 @@ class ProductDetailFragment : Fragment() {
             if (product.imagePath != null) {
                 productImageView.setImageBitmap(BitmapFactory.decodeFile(product.imagePath))
             }
+
+            var shoppingListName = getString(R.string.default_none_value)
+            if (product.shoppingListId != null)
+                shoppingListName = shoppingViewModel.getShoppingListById(product.shoppingListId!!).title
+            shoppingListTextInputEditText.setText(shoppingListName)
+
             nameTextInputEditText.setText(product.name)
             descriptionTextInputEditText.setText(product.description)
             quantityTextInputEditText.setText(product.quantity.toString())

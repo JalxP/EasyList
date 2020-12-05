@@ -14,7 +14,7 @@ interface ShoppingListDao {
     fun getAllShoppingListsNonLive(): List<ShoppingList>
 
     @Query("SELECT * FROM shoppinglist WHERE shoppingListId == :shoppingListId")
-    fun getShoppingListById(shoppingListId: Long) : LiveData<ShoppingList>
+    fun getShoppingListById(shoppingListId: Long) : ShoppingList
 
     @Query("SELECT * FROM shoppinglist WHERE title LIKE :listTitle")
     fun getShoppingListByTitle(listTitle: String) : List<ShoppingList>

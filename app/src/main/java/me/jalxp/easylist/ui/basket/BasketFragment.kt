@@ -48,7 +48,7 @@ class BasketFragment : Fragment() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(resources.getString(R.string.clear_basket_question))
             .setMessage(resources.getString(R.string.clear_basket_message))
-            .setNeutralButton(resources.getString(R.string.clear_basket_cancel)) { dialog, which ->
+            .setNeutralButton(resources.getString(R.string.dialogue_cancel)) { dialog, which ->
                 Snackbar.make(binding.root, "Canceled", Snackbar.LENGTH_LONG).show()
             }
             .setPositiveButton(resources.getString(R.string.clear_basket_confirm)) { dialog, which ->

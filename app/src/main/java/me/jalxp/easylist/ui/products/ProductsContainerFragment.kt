@@ -26,8 +26,7 @@ import me.jalxp.easylist.ui.shoppingList.EXTRA_PRODUCT_NAME
 const val VIEW_TYPE = "view type"
 const val SHOW_PRODUCTS_ALL = 1
 const val SHOW_PRODUCTS_BY_LIST = 2
-const val SHOW_PRODUCTS_BY_CATEGORY = 3
-const val SHOW_PRODUCTS_ON_CART = 4
+const val SHOW_PRODUCTS_ON_CART = 3
 
 class ProductsContainerFragment : Fragment() {
 
@@ -87,9 +86,6 @@ class ProductsContainerFragment : Fragment() {
                     .observe(viewLifecycleOwner, {
                         productsAdapter.submitList(it)
                     })
-            }
-            SHOW_PRODUCTS_BY_CATEGORY -> {
-
             }
             SHOW_PRODUCTS_ON_CART -> {
                 productsViewModel.getProductsOnCart().observe(viewLifecycleOwner, {

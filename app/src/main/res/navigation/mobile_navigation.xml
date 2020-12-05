@@ -62,7 +62,9 @@
         tools:layout="@layout/fragment_add_shopping_list">
         <action
             android:id="@+id/action_addShoppingListFragment_to_nav_shoppinglists"
-            app:destination="@id/nav_shoppinglists" />
+            app:destination="@id/nav_shoppinglists"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

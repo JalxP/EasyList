@@ -2,6 +2,7 @@ package me.jalxp.easylist.ui.shoppingList
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import me.jalxp.easylist.R
 import me.jalxp.easylist.databinding.FragmentSingleListBinding
 import me.jalxp.easylist.ui.products.*
@@ -30,21 +32,6 @@ class SingleListFragment : Fragment(), OnItemSelectedListener {
     ): View? {
 
         binding = FragmentSingleListBinding.inflate(inflater, container, false)
-
-        val shoppingListId = requireArguments().getLong(EXTRA_LIST_ID)
-        val shoppingListTitle = requireArguments().getString(EXTRA_LIST_TITLE)
-
-        val productsContainerFragment = ProductsContainerFragment()
-        val productFragmentArguments = Bundle().apply {
-            putInt(VIEW_TYPE, SHOW_PRODUCTS_BY_LIST)
-            putLong(EXTRA_LIST_ID, shoppingListId)
-        }
-        productsContainerFragment.arguments = productFragmentArguments
-
-
-        parentFragmentManager.beginTransaction().add(
-            R.id.products_frame, productsContainerFragment
-        ).commit()
 
         /* Spinner */
         sortsArray = resources.getStringArray(R.array.sort_by_array)
@@ -68,7 +55,41 @@ class SingleListFragment : Fragment(), OnItemSelectedListener {
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        Toast.makeText(requireContext(), sortsArray[position], Toast.LENGTH_SHORT).show()
+
+
+
+        val shoppingListId = requireArguments().getLong(EXTRA_LIST_ID)
+        val shoppingListTitle = requireArguments().getString(EXTRA_LIST_TITLE)
+
+        when (sortsArray[position]) {
+            getString(R.string.all_sort) -> {
+                val productsContainerFragment = ProductsContainerFragment()
+                val productFragmentArguments = Bundle().apply {
+                    putInt(VIEW_TYPE, SHOW_PRODUCTS_BY_LIST)
+                    putLong(EXTRA_LIST_ID, shoppingListId)
+                }
+                productsContainerFragment.arguments = productFragmentArguments
+                parentFragmentManager.beginTransaction().replace(
+                    R.id.products_frame, productsContainerFragment
+                ).commit()
+
+                Snackbar.make(binding.root, "All Products", Snackbar.LENGTH_SHORT).show()
+            }
+            getString(R.string.category_sort) -> {
+
+                val categorySortFragment = CategorySortFragment()
+                val categorySortFragmentArguments = Bundle().apply {
+                    putLong(EXTRA_LIST_ID, shoppingListId)
+                }
+                categorySortFragment.arguments = categorySortFragmentArguments
+                parentFragmentManager.beginTransaction().replace(
+                    R.id.products_frame, categorySortFragment
+                ).commit()
+
+                Snackbar.make(binding.root, "By Categories", Snackbar.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {

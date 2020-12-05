@@ -73,6 +73,14 @@ class ProductsViewModel(val dataSource: ProductDao) : ViewModel() {
     fun updateProduct(product: Product) {
         dataSource.updateProduct(product)
     }
+
+    fun clearAllAssociationsWithShoppingList(shoppingListId: Long) {
+        // TODO Use MutableLiveData instead
+        getProductsByShoppingListIdNonLive(shoppingListId).forEach {
+            it.shoppingListId = null
+            updateProduct(it)
+        }
+    }
 }
 
 class ProductsViewModelFactory(private val context: Context) : ViewModelProvider.Factory {

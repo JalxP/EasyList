@@ -6,15 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import me.jalxp.easylist.R
 import me.jalxp.easylist.adapters.ShoppingListsAdapter
 import me.jalxp.easylist.databinding.FragmentShoppingListsBinding
 import me.jalxp.easylist.data.entities.ShoppingList
+import me.jalxp.easylist.ui.products.ProductsViewModel
+import me.jalxp.easylist.ui.products.ProductsViewModelFactory
 
 const val EXTRA_LIST_ID = "extra list id"
 const val EXTRA_LIST_TITLE = "extra list name"
@@ -24,8 +28,11 @@ const val EXTRA_PRODUCT_NAME = "extra product name"
 class ShoppingListsFragment : Fragment() {
 
     private lateinit var binding: FragmentShoppingListsBinding
-    private val shoppingViewModel: ShoppingViewModel by viewModels {
+    private val shoppingViewModel: ShoppingViewModel by activityViewModels {
         ShoppingListViewModelFactory(requireContext())
+    }
+    private val productsViewModel: ProductsViewModel by activityViewModels {
+        ProductsViewModelFactory(requireContext())
     }
 
     override fun onCreateView(
@@ -72,11 +79,22 @@ class ShoppingListsFragment : Fragment() {
 
     private fun adapterOnEditClick(shoppingList: ShoppingList) {
         // TODO allow shoppingList edit here.
-        Snackbar.make(binding.root, "Vai passear pá", Snackbar.LENGTH_LONG).show()
+        Snackbar.make(binding.root, "Not Yet Implemented", Snackbar.LENGTH_LONG).show()
     }
 
     private fun adapterOnDeleteClick(shoppingList: ShoppingList) {
-        // TODO pop up to confirm?
-        shoppingViewModel.removeShoppingList(shoppingList)
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(resources.getString(R.string.delete_shopping_list_question))
+            .setMessage(resources.getString(R.string.delete_shopping_list_message))
+            .setNeutralButton(resources.getString(R.string.dialogue_cancel)) { dialog, which ->
+                Snackbar.make(binding.root, "Canceled", Snackbar.LENGTH_LONG).show() // TODO strings
+            }
+            .setPositiveButton(resources.getString(R.string.delete_shopping_list_confirm)) { dialog, which ->
+                Snackbar.make(binding.root, "List Deleted", Snackbar.LENGTH_LONG).show() // TODO strings
+                shoppingViewModel.removeShoppingList(shoppingList)
+                productsViewModel.clearAllAssociationsWithShoppingList(shoppingList.shoppingListId)
+            }
+            .show()
     }
 }

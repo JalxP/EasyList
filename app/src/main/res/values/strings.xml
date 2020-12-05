@@ -34,6 +34,7 @@
     <string name="search">Search</string>
     <string name="create_shopping_list">Create Shopping List</string>
     <string name="create">Create</string>
+    <string name="product_shopping_list_hint">Shopping List</string>
     <string name="shopping_list_name_hint">Name</string>
     <string name="add_new_product">Add New Product</string>
     <string name="product_name_hint">Name</string>
@@ -76,21 +77,25 @@
     <!-- Dialogue Message -->
     <string name="clear_basket_question">Are you sure?</string>
     <string name="clear_basket_message">By confirming all the products in your basket will be cleared.</string>
-    <string name="clear_basket_cancel">Cancel</string>
+    <string name="dialogue_cancel">Cancel</string>
     <string name="clear_basket_confirm">Clear Basket</string>
+    <string name="delete_shopping_list_question">Delete Shopping List?</string>
+    <string name="delete_shopping_list_message">By confirming the shopping list will be removed.</string>
+    <string name="delete_shopping_list_confirm">Delete List</string>
 
     <string-array name="sort_by_array">
         <item>@string/all_sort</item>
         <item>@string/category_sort</item>
         <item>@string/purchase_sort</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="copy_from_hint">Copy From</string>
     <string name="default_none_value">None</string>
     <string name="basket">Basket</string>
     <string name="max_value_cart">++</string>
     <string name="cart_instructions">To add a product to your cart long press it.</string>
     <string name="products_in_your_shopping_cart">Products in your shopping cart:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

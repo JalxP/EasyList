@@ -22,6 +22,10 @@ class CategoriesViewModel(val dataSource: CategoryDao) : ViewModel() {
         }
     }
 
+    fun getAllCategoriesNonLive() : List<Category> {
+        return dataSource.getAllCategoriesNonLive()
+    }
+
     fun getCategoryByDesignation(categoryDesignation: String) : Category {
         return dataSource.getCategoryByDesignation(categoryDesignation)
     }
@@ -32,7 +36,7 @@ class CategoriesViewModel(val dataSource: CategoryDao) : ViewModel() {
 
     fun deleteCategory(category: Category) {
 
-        // TODO only delete if it has no products associated!!
+        // TODO remove association with items
 
         executorService.execute {
             dataSource.deleteCategory(category)

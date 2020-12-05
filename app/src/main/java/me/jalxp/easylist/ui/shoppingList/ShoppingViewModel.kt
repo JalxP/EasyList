@@ -21,6 +21,10 @@ class ShoppingViewModel(private val dataSource: ShoppingListDao) : ViewModel() {
         return dataSource.getAllShoppingListsNonLive()
     }
 
+    fun getShoppingListById(shoppingListId: Long): ShoppingList {
+        return dataSource.getShoppingListById(shoppingListId)
+    }
+
     fun getShoppingListIdFromName(shoppingListName: String) : Long? {
         val list = dataSource.getShoppingListByTitle(shoppingListName)
         if (list.isEmpty())

@@ -36,6 +36,24 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/shoppingList_TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/product_shopping_list_hint"
+                    app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
+                    app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/shoppingList_TextInputEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:focusable="false"
+                        tools:text="Shopping List Name Test" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/name_TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
