@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
-import com.google.android.material.snackbar.Snackbar
 import me.jalxp.easylist.R
 import me.jalxp.easylist.databinding.FragmentSingleListBinding
 import me.jalxp.easylist.ui.products.*
@@ -86,8 +85,7 @@ class SingleListFragment : Fragment(), OnItemSelectedListener {
         }
 
     }
-
     override fun onNothingSelected(parent: AdapterView<*>?) {
-        TODO("Not yet implemented")
+        TODO("Not implemented")
     }
 }

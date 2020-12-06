@@ -181,10 +181,11 @@ class ProductsContainerFragment : Fragment() {
                 dialogueBinding.priceTextInputLayout.error = getString(R.string.need_price_error)
             } else {
                 dialogue.dismiss()
-                // Process the product price here and remove item from cart
+                // Process the product price here and remove item from cart and shopping list
                 val price = dialogueBinding.priceTextInputEditText.text.toString().toDouble()
                 pricesViewModel.insertPrice(price, product.productId)
                 product.onCart = false
+                product.shoppingListId = null
                 productsViewModel.updateProduct(product)
                 Snackbar.make(
                     binding.root,

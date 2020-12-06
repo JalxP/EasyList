@@ -9,7 +9,7 @@ import me.jalxp.easylist.data.entities.Price
 @Dao
 interface PriceDao {
 
-    @Query("SELECT value FROM price WHERE productId == :productId")
+    @Query("SELECT value FROM price WHERE productId == :productId ORDER BY value")
     fun getAllPricesByProductId(productId: Long) : List<Double>
 
     @Query("SELECT MAX(value) FROM price WHERE productId == :productId")

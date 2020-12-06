@@ -42,12 +42,10 @@ class ExpandableCategoriesAdapter(
 
     override fun getGroupId(groupPosition: Int): Long {
         return groupPosition.toLong()
-        //return headers[groupPosition].categoryId
     }
 
     override fun getChildId(groupPosition: Int, childPosition: Int): Long {
         return childPosition.toLong()
-        //return details[headers[groupPosition]]!![childPosition].productId
     }
 
     override fun hasStableIds(): Boolean {

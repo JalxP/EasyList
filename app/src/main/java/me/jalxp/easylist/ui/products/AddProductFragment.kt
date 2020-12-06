@@ -41,7 +41,6 @@ import java.util.*
 
 const val GALLERY_REQUEST_CODE = 10
 const val CAMERA_REQUEST_CODE = 20
-const val SCAN_REQUEST_CODE = 30
 const val GALLERY_PERMISSIONS_REQUEST_CODE = 100
 const val CAMERA_PERMISSIONS_REQUEST_CODE = 200
 
@@ -406,12 +405,12 @@ class AddProductFragment : Fragment() {
         var productMeasureUnitId: Long? = null
         if (productMeasureUnit.isNotEmpty())
             productMeasureUnitId =
-                measurementUnitsViewModel.getMeasurementUnitByDesignation(productMeasureUnit)?.measureUnitId
+                measurementUnitsViewModel.getMeasurementUnitByDesignation(productMeasureUnit).measureUnitId
 
         var productCategoryId: Long? = null
         if (productCategory.isNotEmpty())
             productCategoryId =
-                categoriesViewModel.getCategoryByDesignation(productCategory)?.categoryId
+                categoriesViewModel.getCategoryByDesignation(productCategory).categoryId
 
         val barCodeStr: String = binding.barCodeTextInputEditText.text.toString()
         var barCode: Long? = null

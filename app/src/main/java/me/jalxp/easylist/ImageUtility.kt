@@ -35,28 +35,5 @@ class ImageUtility {
                 else -> view.background = BitmapDrawable(view.resources, bitmap)
             }
         }
-
-        fun setPic(view: View, path: String?, width: Int, height: Int) {
-            if (path.isNullOrEmpty())
-                return
-            if (height < 1 || width < 1) {
-                return
-            }
-            val bmpOptions = BitmapFactory.Options()
-            bmpOptions.inPreferredConfig = Bitmap.Config.RGB_565
-            bmpOptions.inJustDecodeBounds = true
-            BitmapFactory.decodeFile(path)
-            val photoW = bmpOptions.outWidth
-            val photoH = bmpOptions.outHeight
-            val scale = min(photoW / width, photoH / height)
-            bmpOptions.inSampleSize = scale
-            bmpOptions.inJustDecodeBounds = false
-            val bitmap = BitmapFactory.decodeFile(path, bmpOptions)
-            when (view) {
-                is ImageView -> (view as ImageView).setImageBitmap(bitmap)
-                //else -> view.background = bitmap.toDrawable(view.resources)
-                else -> view.background = BitmapDrawable(view.resources, bitmap)
-            }
-        }
     }
 }
