@@ -1,7 +1,6 @@
-package me.jalxp.easylist.ui.measurementUnits
+package me.jalxp.easylist.viewmodels
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import me.jalxp.easylist.data.AppDatabase

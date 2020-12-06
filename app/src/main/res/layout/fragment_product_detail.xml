@@ -261,7 +261,6 @@
                     android:hint="@string/product_price_history"
                     app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
                     app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
-                    app:endIconMode="clear_text"
                     app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -270,6 +269,7 @@
                         android:layout_height="wrap_content"
                         android:cursorVisible="false"
                         android:focusable="false"
+                        android:textAlignment="center"
                         tools:text="Price History Example" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>

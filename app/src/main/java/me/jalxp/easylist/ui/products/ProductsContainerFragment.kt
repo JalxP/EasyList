@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,14 +15,19 @@ import me.jalxp.easylist.R
 import me.jalxp.easylist.adapters.ProductsListAdapter
 import me.jalxp.easylist.data.entities.Product
 import me.jalxp.easylist.databinding.FragmentContainerProductsBinding
-import me.jalxp.easylist.ui.categories.CategoriesViewModel
-import me.jalxp.easylist.ui.categories.CategoriesViewModelFactory
-import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModel
-import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModelFactory
+import me.jalxp.easylist.databinding.PurchaseDialogueBinding
+import me.jalxp.easylist.viewmodels.CategoriesViewModel
+import me.jalxp.easylist.viewmodels.CategoriesViewModelFactory
+import me.jalxp.easylist.viewmodels.MeasurementUnitsViewModel
+import me.jalxp.easylist.viewmodels.MeasurementUnitsViewModelFactory
 
 import me.jalxp.easylist.ui.shoppingList.EXTRA_LIST_ID
 import me.jalxp.easylist.ui.shoppingList.EXTRA_PRODUCT_ID
 import me.jalxp.easylist.ui.shoppingList.EXTRA_PRODUCT_NAME
+import me.jalxp.easylist.viewmodels.PricesViewModel
+import me.jalxp.easylist.viewmodels.PricesViewModelFactory
+import me.jalxp.easylist.viewmodels.ProductsViewModel
+import me.jalxp.easylist.viewmodels.ProductsViewModelFactory
 
 const val VIEW_TYPE = "view type"
 const val SHOW_PRODUCTS_ALL = 1
@@ -39,6 +45,9 @@ class ProductsContainerFragment : Fragment() {
     }
     private val categoriesViewModel: CategoriesViewModel by activityViewModels {
         CategoriesViewModelFactory(requireContext())
+    }
+    private val pricesViewModel: PricesViewModel by activityViewModels {
+        PricesViewModelFactory(requireContext())
     }
 
     private var shoppingListId: Long? = null
@@ -106,13 +115,22 @@ class ProductsContainerFragment : Fragment() {
         // Because we have more origins with the same destination
         when (findNavController().currentDestination?.id) {
             R.id.nav_singleListFragment -> {
-                findNavController().navigate(R.id.action_singleListFragment_to_productDetailFragment, bundle)
+                findNavController().navigate(
+                    R.id.action_singleListFragment_to_productDetailFragment,
+                    bundle
+                )
             }
             R.id.nav_products -> {
-                findNavController().navigate(R.id.action_nav_products_to_productDetailFragment, bundle)
+                findNavController().navigate(
+                    R.id.action_nav_products_to_productDetailFragment,
+                    bundle
+                )
             }
             R.id.nav_basketFragment -> {
-                findNavController().navigate(R.id.action_nav_basketFragment_to_nav_productDetailFragment, bundle)
+                findNavController().navigate(
+                    R.id.action_nav_basketFragment_to_nav_productDetailFragment,
+                    bundle
+                )
             }
         }
     }
@@ -121,20 +139,58 @@ class ProductsContainerFragment : Fragment() {
 
         when (findNavController().currentDestination?.id) {
             R.id.nav_singleListFragment -> {
-                if (!product.onCart) {
-                    product.onCart = true
-                    productsViewModel.updateProduct(product)
-                    binding.recycleViewList.adapter?.notifyDataSetChanged()
-                    val str =
+                product.onCart = !product.onCart
+                productsViewModel.updateProduct(product)
+                binding.recycleViewList.adapter?.notifyDataSetChanged()
+
+                Snackbar.make(
+                    binding.root,
+                    if (product.onCart)
                         getString(R.string.prefix_item_added_to_cart) + product.name + getString(R.string.posfix_item_added_to_cart)
-                    Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show()
-                } else {
-                    val str = product.name + getString(R.string.posfix_item_already_on_cart)
-                    Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show()
-                }
+                    else
+                        getString(R.string.prefix_item_removed_from_cart) + product.name + getString(
+                            R.string.posfix_item_removed_from_cart
+                        ), Snackbar.LENGTH_SHORT
+                ).show()
+
+            }
+            R.id.nav_basketFragment -> {
+                registerPurchase(product)
             }
             else -> {
                 Log.e("<DEBUG>", "Do not add ${product.name} to shopping cart!")
+            }
+        }
+    }
+
+    private fun registerPurchase(product: Product) {
+
+        val dialogueBinding =
+            PurchaseDialogueBinding.inflate(layoutInflater, view as ViewGroup, false)
+        val dialogue = AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.purchase_price_indication) + product.name)
+            .setView(dialogueBinding.root)
+            .setPositiveButton(
+                getString(R.string.submit_price), null
+            )
+            .setNegativeButton(getString(R.string.dialogue_cancel), null)
+            .show()
+
+        dialogue.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            if (dialogueBinding.priceTextInputEditText.text.isNullOrEmpty()) {
+                dialogueBinding.priceTextInputLayout.error = getString(R.string.need_price_error)
+            } else {
+                dialogue.dismiss()
+                // Process the product price here and remove item from cart
+                val price = dialogueBinding.priceTextInputEditText.text.toString().toDouble()
+                pricesViewModel.insertPrice(price, product.productId)
+                product.onCart = false
+                productsViewModel.updateProduct(product)
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.prefix_purchased_registed) + product.name + getString(R.string.posfix_purchased_registed) + price,
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
         }
     }

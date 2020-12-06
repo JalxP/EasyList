@@ -5,9 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,8 +15,10 @@ import me.jalxp.easylist.R
 import me.jalxp.easylist.adapters.ShoppingListsAdapter
 import me.jalxp.easylist.databinding.FragmentShoppingListsBinding
 import me.jalxp.easylist.data.entities.ShoppingList
-import me.jalxp.easylist.ui.products.ProductsViewModel
-import me.jalxp.easylist.ui.products.ProductsViewModelFactory
+import me.jalxp.easylist.viewmodels.ProductsViewModel
+import me.jalxp.easylist.viewmodels.ProductsViewModelFactory
+import me.jalxp.easylist.viewmodels.ShoppingListViewModelFactory
+import me.jalxp.easylist.viewmodels.ShoppingViewModel
 
 const val EXTRA_LIST_ID = "extra list id"
 const val EXTRA_LIST_TITLE = "extra list name"

@@ -12,7 +12,7 @@ data class Product(
     var categoryId: Long?,
     var shoppingListId: Long?,
     var brand: String?,
-    var barCode: Double?,
+    var barCode: Long?,
     var imagePath: String?
 ) {
     @PrimaryKey(autoGenerate = true)

@@ -40,10 +40,13 @@
     <string name="product_name_hint">Name</string>
     <string name="product_description_hint">Description</string>
     <string name="product_brand_hint">Brand</string>
+    <string name="product_bar_code_hint">Bar Code</string>
     <string name="product_price_history">Price History</string>
+    <string name="product_purchase_price">Purchase Cost</string>
     <string name="product_lowest_price">Lowest Price</string>
     <string name="product_highest_price">Highest Price</string>
     <string name="add_button">Add</string>
+    <string name="scan_button">Scan</string>
     <string name="activity_add_product">Add Product</string>
     <string name="create_category_button">Create category button</string>
     <string name="create_measurementUnit_button">Create measurement unit button</string>
@@ -57,6 +60,7 @@
     <string name="category">Category</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
+    <string name="money_symbol">€</string>
 
     <!-- Input Error Messages -->
     <string name="need_name_error">Name is required.</string>
@@ -67,21 +71,31 @@
     <string name="need_designation_error">Designation is required.</string>
     <string name="measurement_already_exists_error">Measurement unit already exists.</string>
     <string name="category_already_exists_error">Category already exists.</string>
+    <string name="need_price_error">A value is required.</string>
+
 
     <!-- Snackbar Messages -->
-    <string name="prefix_item_added_to_cart">Added\ </string>
-    <string name="posfix_item_added_to_cart">\ to shopping cart.</string>
-    <string name="posfix_item_already_on_cart">\ is already on the shopping cart.</string>
+    <string name="prefix_item_added_to_cart">Added\u0020</string>
+    <string name="posfix_item_added_to_cart">\u0020to shopping cart.</string>
+    <string name="prefix_item_removed_from_cart">Removed\u0020</string>
+    <string name="posfix_item_removed_from_cart">\u0020from shopping cart.</string>
+    <string name="prefix_purchased_registed">Purchased\u0020</string>
+    <string name="posfix_purchased_registed">\u0020for €</string>
+
+
+
     <string name="snackbar_dismiss">Dismiss</string>
 
-    <!-- Dialogue Message -->
+    <!-- Dialogue Messages -->
     <string name="clear_basket_question">Are you sure?</string>
     <string name="clear_basket_message">By confirming all the products in your basket will be cleared.</string>
+    <string name="submit_price">Submit</string>
     <string name="dialogue_cancel">Cancel</string>
     <string name="clear_basket_confirm">Clear Basket</string>
     <string name="delete_shopping_list_question">Delete Shopping List?</string>
     <string name="delete_shopping_list_message">By confirming the shopping list will be removed.</string>
     <string name="delete_shopping_list_confirm">Delete List</string>
+    <string name="purchase_price_indication">Enter the price of\u0020</string>
 
     <string-array name="sort_by_array">
         <item>@string/all_sort</item>
@@ -93,9 +107,6 @@
     <string name="default_none_value">None</string>
     <string name="basket">Basket</string>
     <string name="max_value_cart">++</string>
-    <string name="cart_instructions">To add a product to your cart long press it.</string>
-    <string name="products_in_your_shopping_cart">Products in your shopping cart:</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="cart_instructions">To add/remove an item to the shopping cart long press it.</string>
+    <string name="purchase_instruction">To register a purchased item long press it.</string>
 </resources>

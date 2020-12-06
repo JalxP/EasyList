@@ -12,8 +12,10 @@ import androidx.navigation.fragment.findNavController
 import me.jalxp.easylist.R
 import me.jalxp.easylist.data.entities.ShoppingList
 import me.jalxp.easylist.databinding.FragmentAddShoppingListBinding
-import me.jalxp.easylist.ui.products.ProductsViewModel
-import me.jalxp.easylist.ui.products.ProductsViewModelFactory
+import me.jalxp.easylist.viewmodels.ProductsViewModel
+import me.jalxp.easylist.viewmodels.ProductsViewModelFactory
+import me.jalxp.easylist.viewmodels.ShoppingListViewModelFactory
+import me.jalxp.easylist.viewmodels.ShoppingViewModel
 
 class AddShoppingListFragment : Fragment() {
 

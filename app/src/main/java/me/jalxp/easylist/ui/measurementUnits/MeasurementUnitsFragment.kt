@@ -13,6 +13,8 @@ import me.jalxp.easylist.R
 import me.jalxp.easylist.adapters.MeasurementUnitsListAdapter
 import me.jalxp.easylist.data.entities.MeasureUnit
 import me.jalxp.easylist.databinding.FragmentMeasurementUnitsBinding
+import me.jalxp.easylist.viewmodels.MeasurementUnitsViewModel
+import me.jalxp.easylist.viewmodels.MeasurementUnitsViewModelFactory
 
 
 class MeasurementUnitsFragment : Fragment() {

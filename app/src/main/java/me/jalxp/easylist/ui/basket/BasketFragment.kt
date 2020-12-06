@@ -1,18 +1,18 @@
 package me.jalxp.easylist.ui.basket
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.asFlow
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import me.jalxp.easylist.R
 import me.jalxp.easylist.databinding.FragmentBasketBinding
 import me.jalxp.easylist.ui.products.*
+import me.jalxp.easylist.viewmodels.ProductsViewModel
+import me.jalxp.easylist.viewmodels.ProductsViewModelFactory
 
 class BasketFragment : Fragment() {
     private lateinit var binding: FragmentBasketBinding

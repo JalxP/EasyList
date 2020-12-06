@@ -1,4 +1,4 @@
-package me.jalxp.easylist.ui.shoppingList
+package me.jalxp.easylist.viewmodels
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

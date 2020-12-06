@@ -7,12 +7,16 @@
     tools:context=".ui.basket.BasketFragment">
 
     <TextView
-        android:id="@+id/basket_TextView"
-        style="@style/title"
+        android:id="@+id/cart_instruction_TextView"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin"
-        android:text="@string/products_in_your_shopping_cart"
+        android:text="@string/purchase_instruction"
+        android:textColor="@color/green_ok"
+        android:textStyle="italic"
+        app:autoSizeMaxTextSize="24sp"
+        app:autoSizeMinTextSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/basket_TextView"
+        app:layout_constraintTop_toBottomOf="@+id/cart_instruction_TextView"
         app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

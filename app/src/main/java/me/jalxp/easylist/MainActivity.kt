@@ -1,7 +1,6 @@
 package me.jalxp.easylist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.FrameLayout
@@ -12,12 +11,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import me.jalxp.easylist.databinding.ActivityMainBinding
-import me.jalxp.easylist.ui.products.ProductsViewModel
-import me.jalxp.easylist.ui.products.ProductsViewModelFactory
+import me.jalxp.easylist.viewmodels.ProductsViewModel
+import me.jalxp.easylist.viewmodels.ProductsViewModelFactory
 import me.jalxp.easylist.ui.shoppingList.EXTRA_LIST_TITLE
 import me.jalxp.easylist.ui.shoppingList.EXTRA_PRODUCT_NAME
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class MainActivity : AppCompatActivity() {

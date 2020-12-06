@@ -1,4 +1,4 @@
-package me.jalxp.easylist.ui.products
+package me.jalxp.easylist.viewmodels
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -9,7 +9,7 @@ import me.jalxp.easylist.data.daos.ProductDao
 import me.jalxp.easylist.data.entities.Product
 import java.util.concurrent.Executors
 
-class ProductsViewModel(val dataSource: ProductDao) : ViewModel() {
+class ProductsViewModel(private val dataSource: ProductDao) : ViewModel() {
 
     private val executorService = Executors.newSingleThreadExecutor()
 
@@ -21,7 +21,7 @@ class ProductsViewModel(val dataSource: ProductDao) : ViewModel() {
         categoryId: Long?,
         shoppingListId: Long?,
         brand: String?,
-        barCode: Double?,
+        barCode: Long?,
         imagePath: String?
     ) {
         val product = Product(name, description, quantity, measureUnitId, categoryId, shoppingListId, brand, barCode, imagePath)

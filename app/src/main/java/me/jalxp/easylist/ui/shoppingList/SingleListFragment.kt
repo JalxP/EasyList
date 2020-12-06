@@ -2,20 +2,19 @@ package me.jalxp.easylist.ui.shoppingList
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import me.jalxp.easylist.R
 import me.jalxp.easylist.databinding.FragmentSingleListBinding
 import me.jalxp.easylist.ui.products.*
+import me.jalxp.easylist.viewmodels.ProductsViewModel
+import me.jalxp.easylist.viewmodels.ProductsViewModelFactory
 
 class SingleListFragment : Fragment(), OnItemSelectedListener {
 
@@ -72,8 +71,6 @@ class SingleListFragment : Fragment(), OnItemSelectedListener {
                 parentFragmentManager.beginTransaction().replace(
                     R.id.products_frame, productsContainerFragment
                 ).commit()
-
-                Snackbar.make(binding.root, "All Products", Snackbar.LENGTH_SHORT).show()
             }
             getString(R.string.category_sort) -> {
 
@@ -85,8 +82,6 @@ class SingleListFragment : Fragment(), OnItemSelectedListener {
                 parentFragmentManager.beginTransaction().replace(
                     R.id.products_frame, categorySortFragment
                 ).commit()
-
-                Snackbar.make(binding.root, "By Categories", Snackbar.LENGTH_SHORT).show()
             }
         }
 

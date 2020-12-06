@@ -111,10 +111,6 @@ a
 1app/src/main/res/layout/fragment_add_category.xml,f/6/f61d41713bfb5167bb67b4f655e48a4b1c39eda1
 i
 9app/src/main/res/layout/fragment_add_measurement_unit.xml,4/0/40e708072ac721d3449a65a5e03450bbda10bcd8
-`
-0app/src/main/res/layout/fragment_add_product.xml,a/d/adc6cfa87f9006dc3776c8f4900c0032db9ce33f
-e
-5app/src/main/res/layout-land/fragment_add_product.xml,7/5/7553cf145bdcca12e4b79e306916619b37feae9d
 N
 app/src/main/res/menu/main.xml,2/2/22209de88391c01e1ce3911e9b7305487116d1a1
 e
@@ -133,7 +129,5 @@ _
 /app/src/main/res/drawable/twotone_remove_24.xml,e/9/e9e0ec48ac66f02216d8163c3769e995beeba271
 f
 6app/src/main/res/drawable/twotone_remove_circle_24.xml,4/c/4ccff5859843dac3d596629f686f1757f9060cea
-[
-+app/src/main/res/layout/fragment_basket.xml,f/4/f42aca84d604041a14d99810ff3f2991041f3d4e
 o
 ?app/src/main/java/me/jalxp/easylist/ui/basket/BasketFragment.kt,e/2/e240c95f4fbf9e5b15a2a7ddd6c459f51474ac8f

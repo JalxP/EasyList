@@ -12,6 +12,8 @@ import me.jalxp.easylist.R
 import me.jalxp.easylist.adapters.CategoriesListAdapter
 import me.jalxp.easylist.data.entities.Category
 import me.jalxp.easylist.databinding.FragmentCategoriesBinding
+import me.jalxp.easylist.viewmodels.CategoriesViewModel
+import me.jalxp.easylist.viewmodels.CategoriesViewModelFactory
 
 class CategoriesFragment : Fragment() {
 

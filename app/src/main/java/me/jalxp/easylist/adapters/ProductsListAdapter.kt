@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import me.jalxp.easylist.data.entities.Product
 import me.jalxp.easylist.databinding.ProductItemBinding
-import me.jalxp.easylist.ui.categories.CategoriesViewModel
-import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModel
+import me.jalxp.easylist.viewmodels.CategoriesViewModel
+import me.jalxp.easylist.viewmodels.MeasurementUnitsViewModel
 
 class ProductsListAdapter(
     private val categoriesViewModel: CategoriesViewModel,

@@ -1,6 +1,5 @@
 package me.jalxp.easylist.ui.categories
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +9,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import me.jalxp.easylist.R
 import me.jalxp.easylist.databinding.FragmentAddCategoryBinding
+import me.jalxp.easylist.viewmodels.CategoriesViewModel
+import me.jalxp.easylist.viewmodels.CategoriesViewModelFactory
 
 class AddCategoryFragment: Fragment() {
 

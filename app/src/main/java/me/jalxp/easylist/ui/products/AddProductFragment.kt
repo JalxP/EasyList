@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.StrictMode
 import android.provider.MediaStore
-import android.text.format.DateUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,14 +22,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.google.zxing.integration.android.IntentIntegrator
 import me.jalxp.easylist.ImageUtility
 import me.jalxp.easylist.R
 import me.jalxp.easylist.databinding.FragmentAddProductBinding
-import me.jalxp.easylist.ui.categories.CategoriesViewModel
-import me.jalxp.easylist.ui.categories.CategoriesViewModelFactory
-import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModel
-import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModelFactory
+import me.jalxp.easylist.viewmodels.CategoriesViewModel
+import me.jalxp.easylist.viewmodels.CategoriesViewModelFactory
+import me.jalxp.easylist.viewmodels.MeasurementUnitsViewModel
+import me.jalxp.easylist.viewmodels.MeasurementUnitsViewModelFactory
 import me.jalxp.easylist.ui.shoppingList.EXTRA_LIST_ID
+import me.jalxp.easylist.viewmodels.ProductsViewModel
+import me.jalxp.easylist.viewmodels.ProductsViewModelFactory
 import java.io.File
 import java.lang.reflect.Method
 import java.text.SimpleDateFormat
@@ -39,6 +41,7 @@ import java.util.*
 
 const val GALLERY_REQUEST_CODE = 10
 const val CAMERA_REQUEST_CODE = 20
+const val SCAN_REQUEST_CODE = 30
 const val GALLERY_PERMISSIONS_REQUEST_CODE = 100
 const val CAMERA_PERMISSIONS_REQUEST_CODE = 200
 
@@ -91,12 +94,15 @@ class AddProductFragment : Fragment() {
                 (binding.measurementUnitAutoComplete as? AutoCompleteTextView)?.setAdapter(adapter)
             })
 
-        /* Imageview select image / take photo */
+        /* Buttons */
         binding.importImageButton.setOnClickListener {
             selectImageFromGallery()
         }
         binding.captureImageButton.setOnClickListener {
             captureImage()
+        }
+        binding.barCodeButton.setOnClickListener {
+            scanBarCode()
         }
 
         /* Float Action Button */
@@ -108,6 +114,7 @@ class AddProductFragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.e("debug", "requestCode: $requestCode")
 
         when (requestCode) {
             GALLERY_REQUEST_CODE -> {
@@ -132,6 +139,12 @@ class AddProductFragment : Fragment() {
                         binding.productImageView,
                         filePath
                     )
+                }
+            }
+            IntentIntegrator.REQUEST_CODE -> {
+                val scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+                if (scanResult != null) {
+                    binding.barCodeTextInputEditText.setText(scanResult.contents)
                 }
             }
             else -> {
@@ -271,6 +284,14 @@ class AddProductFragment : Fragment() {
         return File(filePath)
     }
 
+    private fun scanBarCode() {
+        IntentIntegrator.forSupportFragment(this)
+            .setBeepEnabled(false)
+            .setCameraId(0)
+            .setPrompt("Scan the product bar code.")
+            .initiateScan()
+    }
+
     private fun addProductClicked() {
         val productName = binding.productNameInput.text.toString()
         if (productName.isEmpty()) {
@@ -307,7 +328,6 @@ class AddProductFragment : Fragment() {
             )
 
     }
-
 
     private fun addProductToMainList(
         productName: String,
@@ -393,6 +413,12 @@ class AddProductFragment : Fragment() {
             productCategoryId =
                 categoriesViewModel.getCategoryByDesignation(productCategory)?.categoryId
 
+        val barCodeStr: String = binding.barCodeTextInputEditText.text.toString()
+        var barCode: Long? = null
+        if (barCodeStr.isNotEmpty())
+            barCode = barCodeStr.toLong()
+
+
         productsViewModel.insertNewProduct(
             productName,
             productDescription,
@@ -401,7 +427,7 @@ class AddProductFragment : Fragment() {
             productCategoryId,
             shoppingListId,
             productBrand,
-            null, // TODO
+            barCode,
             filePath
         )
     }

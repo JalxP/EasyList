@@ -10,13 +10,17 @@ import androidx.fragment.app.activityViewModels
 import me.jalxp.easylist.R
 import me.jalxp.easylist.data.entities.Product
 import me.jalxp.easylist.databinding.FragmentProductDetailBinding
-import me.jalxp.easylist.ui.categories.CategoriesViewModel
-import me.jalxp.easylist.ui.categories.CategoriesViewModelFactory
-import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModel
-import me.jalxp.easylist.ui.measurementUnits.MeasurementUnitsViewModelFactory
+import me.jalxp.easylist.viewmodels.CategoriesViewModel
+import me.jalxp.easylist.viewmodels.CategoriesViewModelFactory
+import me.jalxp.easylist.viewmodels.MeasurementUnitsViewModel
+import me.jalxp.easylist.viewmodels.MeasurementUnitsViewModelFactory
 import me.jalxp.easylist.ui.shoppingList.EXTRA_PRODUCT_ID
-import me.jalxp.easylist.ui.shoppingList.ShoppingListViewModelFactory
-import me.jalxp.easylist.ui.shoppingList.ShoppingViewModel
+import me.jalxp.easylist.viewmodels.ShoppingListViewModelFactory
+import me.jalxp.easylist.viewmodels.ShoppingViewModel
+import me.jalxp.easylist.viewmodels.PricesViewModel
+import me.jalxp.easylist.viewmodels.PricesViewModelFactory
+import me.jalxp.easylist.viewmodels.ProductsViewModel
+import me.jalxp.easylist.viewmodels.ProductsViewModelFactory
 
 class ProductDetailFragment : Fragment() {
 
@@ -32,6 +36,9 @@ class ProductDetailFragment : Fragment() {
     }
     private val shoppingViewModel: ShoppingViewModel by activityViewModels {
         ShoppingListViewModelFactory(requireContext())
+    }
+    private val pricesViewModel: PricesViewModel by activityViewModels {
+        PricesViewModelFactory(requireContext())
     }
 
     private lateinit var product: Product
@@ -62,7 +69,8 @@ class ProductDetailFragment : Fragment() {
 
             var shoppingListName = getString(R.string.default_none_value)
             if (product.shoppingListId != null)
-                shoppingListName = shoppingViewModel.getShoppingListById(product.shoppingListId!!).title
+                shoppingListName =
+                    shoppingViewModel.getShoppingListById(product.shoppingListId!!).title
             shoppingListTextInputEditText.setText(shoppingListName)
 
             nameTextInputEditText.setText(product.name)
@@ -82,6 +90,22 @@ class ProductDetailFragment : Fragment() {
             categoryAutoCompleteTextView.setText(productCategory)
 
             brandTextInputEditText.setText(product.brand)
+
+            val lowestPrice =
+                getString(R.string.money_symbol) + pricesViewModel.getMinPriceByProductId(product.productId)
+                    .toString()
+            val highestPrice =
+                getString(R.string.money_symbol) + pricesViewModel.getMaxPriceByProductId(product.productId)
+                    .toString()
+            val prices = pricesViewModel.getAllPricesByProductId(product.productId)
+
+            lowestPriceTextInputEditText.setText(lowestPrice)
+            highestPriceTextInputEditText.setText(highestPrice)
+            var pricesStr = ""
+            prices.forEach {
+                pricesStr += getString(R.string.money_symbol) + it.toString() + "\n"
+            }
+            pricesTextInputEditText.setText(pricesStr)
         }
 
         // TODO prices, save button, etc

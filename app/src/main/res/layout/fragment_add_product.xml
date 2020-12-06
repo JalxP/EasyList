@@ -8,13 +8,12 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin"
         android:layout_marginEnd="@dimen/margin_small"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/add_product_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <ImageView
@@ -73,6 +73,7 @@
             android:id="@+id/product_name_text_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:hint="@string/product_name_hint"
             app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
             app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
@@ -89,6 +90,7 @@
             android:id="@+id/product_description_text_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:hint="@string/product_description_hint"
             app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
             app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
@@ -104,6 +106,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:baselineAligned="false"
             android:orientation="horizontal">
 
@@ -150,6 +153,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:hint="@string/category"
             app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
             app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
@@ -158,7 +162,7 @@
             <AutoCompleteTextView
                 android:id="@+id/category_auto_complete"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -167,6 +171,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_small"
+            android:layout_weight="1"
             android:hint="@string/product_brand_hint"
             app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
             app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
@@ -179,22 +184,56 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/bar_code_TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_tiny"
+                android:layout_weight="2"
+                android:hint="@string/product_bar_code_hint"
+                app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
+                app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/bar_code_TextInputEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    tools:text="7890987654321" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/bar_code_Button"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/margin_tiny"
+                android:layout_weight="1"
+                android:text="@string/scan_button"
+                app:icon="@drawable/twotone_qr_code_scanner_24" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/add_product_button"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:paddingStart="@dimen/padding_big"
+            android:paddingEnd="@dimen/padding_big"
+            android:text="@string/add_button"
+            app:icon="@drawable/twotone_add_shopping_cart_black_24" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/add_product_button"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="16dp"
-        android:paddingStart="@dimen/padding_big"
-        android:paddingEnd="@dimen/padding_big"
-        android:text="@string/add_button"
-        app:icon="@drawable/twotone_add_shopping_cart_black_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

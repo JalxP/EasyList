@@ -57,6 +57,10 @@ dependencies {
     kapt 'androidx.room:room-compiler:2.2.5'
     annotationProcessor 'androidx.room:room-compiler:2.2.5'
 
+    // Bar Code
+    implementation 'com.google.zxing:core:3.3.3'
+    implementation 'com.journeyapps:zxing-android-embedded:4.1.0@aar'
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

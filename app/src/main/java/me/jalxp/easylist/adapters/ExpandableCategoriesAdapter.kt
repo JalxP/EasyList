@@ -1,6 +1,8 @@
 package me.jalxp.easylist.adapters
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -84,6 +86,10 @@ class ExpandableCategoriesAdapter(
         val product = getChild(groupPosition, childPosition) as Product
         childBinding.productNameTextView.text = product.name
         childBinding.productQuantityTextView.text = product.quantity.toString()
+        if (product.onCart)
+            childBinding.productNameTextView.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#43A047"));
+        else
+            childBinding.productNameTextView.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFD149"));
 
         childBinding.root.setOnLongClickListener {
             onLongItemClick(product)
