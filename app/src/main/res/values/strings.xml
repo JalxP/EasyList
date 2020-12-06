@@ -46,6 +46,7 @@
     <string name="product_lowest_price">Lowest Price</string>
     <string name="product_highest_price">Highest Price</string>
     <string name="add_button">Add</string>
+    <string name="save_button">Save</string>
     <string name="scan_button">Scan</string>
     <string name="activity_add_product">Add Product</string>
     <string name="create_category_button">Create category button</string>
@@ -61,6 +62,7 @@
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
     <string name="money_symbol">€</string>
+    <string name="bar_code_scan_message">Scan the product bar code.</string>
 
     <!-- Input Error Messages -->
     <string name="need_name_error">Name is required.</string>
@@ -81,6 +83,9 @@
     <string name="posfix_item_removed_from_cart">\u0020from shopping cart.</string>
     <string name="prefix_purchased_registed">Purchased\u0020</string>
     <string name="posfix_purchased_registed">\u0020for €</string>
+    <string name="invalid_quantity_message">Minimum value reached.</string>
+    <string name="prefix_product_changes_saved">Saved\u0020</string>
+    <string name="posfix_product_changes_saved">\u0020changes.</string>
 
 
 

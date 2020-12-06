@@ -287,7 +287,7 @@ class AddProductFragment : Fragment() {
         IntentIntegrator.forSupportFragment(this)
             .setBeepEnabled(false)
             .setCameraId(0)
-            .setPrompt("Scan the product bar code.")
+            .setPrompt(getString(R.string.bar_code_scan_message))
             .initiateScan()
     }
 

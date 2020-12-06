@@ -203,6 +203,18 @@
                         tools:text="Product Brand Test" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <Button
+                    android:id="@+id/save_product_button"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/padding"
+                    android:paddingStart="@dimen/padding_big"
+                    android:paddingEnd="@dimen/padding_big"
+                    android:text="@string/save_button"
+                    app:icon="@drawable/twotone_save_24" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
